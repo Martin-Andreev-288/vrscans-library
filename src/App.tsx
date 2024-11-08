@@ -1,11 +1,7 @@
 import React from "react";
 
 const App: React.FC = () => {
-  return (
-    <div>
-      <h1>Hello, Vite + React + TypeScript!</h1>
-    </div>
-  );
+  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
 };
 
 export default App;
