@@ -17,15 +17,15 @@ export default [
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
-        ecmaFeatures: { jsx: true },
-      },
+        ecmaFeatures: { jsx: true }
+      }
     },
     settings: { react: { version: "18.3" } },
     plugins: {
       "@typescript-eslint": typescript,
       react,
       "react-hooks": reactHooks,
-      "react-refresh": reactRefresh,
+      "react-refresh": reactRefresh
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -35,11 +35,9 @@ export default [
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-react": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_" },
-      ],
-      "no-console": "warn",
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "no-console": "warn"
     },
-  },
+    extends: ["prettier"]
+  }
 ];
