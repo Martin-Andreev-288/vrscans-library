@@ -1,4 +1,5 @@
 export { default as Welcome } from "./Welcome";
+export { default as HomeLayout } from "./HomeLayout";
 export { default as Login } from "./Login";
 export { default as SignUp } from "./SignUp";
 export { default as Products } from "./Products";
