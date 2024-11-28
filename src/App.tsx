@@ -7,21 +7,25 @@ import {
   Products,
   Profile,
   Favorites,
-  Collections
+  Collections,
+  Error
 } from "./pages";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Welcome />
+    element: <Welcome />,
+    errorElement: <Error />
   },
   {
     path: "/login",
-    element: <Login />
+    element: <Login />,
+    errorElement: <Error />
   },
   {
     path: "/signup",
-    element: <SignUp />
+    element: <SignUp />,
+    errorElement: <Error />
   },
   {
     path: "/",
