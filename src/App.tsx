@@ -10,6 +10,7 @@ import {
   Collections,
   Error
 } from "./pages";
+import { ErrorElement } from "./components";
 
 const router = createBrowserRouter([
   {
@@ -30,22 +31,27 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeLayout />,
+    errorElement: <ErrorElement />,
     children: [
       {
         path: "products",
-        element: <Products />
+        element: <Products />,
+        errorElement: <ErrorElement />
       },
       {
         path: "favorites",
-        element: <Favorites />
+        element: <Favorites />,
+        errorElement: <ErrorElement />
       },
       {
         path: "profile",
-        element: <Profile />
+        element: <Profile />,
+        errorElement: <ErrorElement />
       },
       {
         path: "collections",
-        element: <Collections />
+        element: <Collections />,
+        errorElement: <ErrorElement />
       }
     ]
   }
