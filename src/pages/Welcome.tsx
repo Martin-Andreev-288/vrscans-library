@@ -9,7 +9,7 @@ const Welcome: React.FC = () => {
       style={{ backgroundImage: `url(${welcomeImg})`, backgroundSize: "auto 100vh" }}
     >
       <div className="flex flex-col items-center justify-center h-[90vh]">
-        <div className="flex flex-col items-center justify-center bg-gray-600 bg-opacity-70 p-20 rounded-3xl">
+        <div className="flex flex-col items-center justify-center h-[70vh] bg-gray-600 bg-opacity-70 p-20 rounded-3xl">
           <h1 className="text-5xl font-bold text-white pb-6">VRScans Materials Library</h1>
           <p className="text-lg text-white pb-40">
             An intuitive, React-powered application that dynamically fetches and displays VRScans
