@@ -1,5 +1,5 @@
-const Products: React.FC = () => {
-  return <div>Products</div>;
-};
+import { ProductContainer } from "../components";
 
-export default Products;
+export default function Products() {
+  return <ProductContainer />;
+}
