@@ -1,4 +1,4 @@
-const EmailInput: React.FC = () => {
+export default function EmailInput() {
   return (
     <>
       <div className="relative">
@@ -24,6 +24,4 @@ const EmailInput: React.FC = () => {
       </div>
     </>
   );
-};
-
-export default EmailInput;
+}

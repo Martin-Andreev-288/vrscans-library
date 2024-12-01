@@ -1,6 +1,7 @@
 import logo from "../assets/logo.png";
 import logInImg from "../assets/sign-in-img.png";
 import EmailInput from "../components/emailInput/EmailInput";
+import DefaultInput from "../components/defaultInput/DefaultInput";
 
 const Login: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const Login: React.FC = () => {
         <div>
           <h1 className="text-5xl font-bold text-black pb-6">Log In</h1>
           <EmailInput />
+          <DefaultInput placeholder="Password" />
         </div>
       </div>
     </div>
