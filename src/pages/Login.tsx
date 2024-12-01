@@ -11,7 +11,7 @@ const Login: React.FC = () => {
       <div className="flex flex-row items-center h-[90vh]">
         <img className="h-[45vh] rounded-2xl mr-20" src={logInImg} alt="VR Scan Image" />
         <div className="w-[25vw] h-[45vh] flex flex-col items-center">
-          <h2 className="text-5xl font-bold text-black pb-10">Log In</h2>
+          <h2 className="text-4xl font-bold text-black pb-10">Log In</h2>
           <form>
             <div className="pb-3 w-[25vw]">
               <DefaultInput placeholder="Email" />
