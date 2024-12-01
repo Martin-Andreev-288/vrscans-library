@@ -10,17 +10,23 @@ const Login: React.FC = () => {
       </div>
       <div className="flex flex-row items-center h-[90vh]">
         <img className="h-[45vh] rounded-2xl mr-20" src={logInImg} alt="VR Scan Image" />
-        <div className="w-[25vw]">
-          <h1 className="text-5xl font-bold text-black pb-6">Log In</h1>
-          <DefaultInput placeholder="Email" />
-          <DefaultInput placeholder="Password" />
-          <div className="mb-10">
-            <input
-              type="submit"
-              value="Log In"
-              className="w-full cursor-pointer rounded-md border border-primary bg-black px-5 py-3 text-base font-medium text-white transition hover:bg-opacity-90"
-            />
-          </div>
+        <div className="w-[25vw] h-[45vh] flex flex-col items-center">
+          <h2 className="text-5xl font-bold text-black pb-10">Log In</h2>
+          <form>
+            <div className="pb-3 w-[25vw]">
+              <DefaultInput placeholder="Email" />
+            </div>
+            <div className="pb-3 w-[25vw]">
+              <DefaultInput placeholder="Password" />
+            </div>
+            <div className="mb-10">
+              <input
+                type="submit"
+                value="Log In"
+                className="w-full cursor-pointer rounded-md border border-primary bg-black px-5 py-3 text-base font-medium text-white transition hover:bg-opacity-90"
+              />
+            </div>
+          </form>
           <p className="mb-2 inline-block text-base text-dark hover:text-primary hover:underline dark:text-black">
             Forgot Password?
           </p>
