@@ -28,7 +28,7 @@ const SignUp: React.FC = () => {
             <div className="mb-5">
               <input
                 type="submit"
-                value="Log In"
+                value="Sign Up"
                 className="w-full cursor-pointer rounded-md border border-primary bg-black px-5 py-3 text-base font-medium text-white transition hover:bg-opacity-90"
               />
             </div>
