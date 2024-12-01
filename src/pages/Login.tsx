@@ -31,7 +31,7 @@ const Login: React.FC = () => {
             Forgot Password?
           </p>
           <p className="text-base text-body-color dark:text-dark-6">
-            <span className="pr-0.5 text-gray-00">Not a member yet?</span>
+            <span className="pr-0.5 text-gray-400">Not a member yet?</span>
             <span className="text-primary hover:underline"> Sign Up</span>
           </p>
         </div>
