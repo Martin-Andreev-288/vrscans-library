@@ -33,13 +33,6 @@ const SignUp: React.FC = () => {
               />
             </div>
           </form>
-          <p className="mb-2 inline-block text-base text-dark hover:text-primary hover:underline dark:text-black">
-            Forgot Password?
-          </p>
-          <p className="text-base text-body-color dark:text-dark-6">
-            <span className="pr-0.5 text-gray-400">Not a member yet?</span>
-            <span className="text-primary hover:underline"> Sign Up</span>
-          </p>
         </div>
       </div>
     </div>
