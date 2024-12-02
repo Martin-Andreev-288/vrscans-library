@@ -1,6 +1,7 @@
 import logo from "../assets/logo.png";
 import logInImg from "../assets/sign-in-img.png";
 import DefaultInput from "../components/defaultInput/DefaultInput";
+import Button from "../components/button/Button";
 
 const Login: React.FC = () => {
   return (
@@ -20,11 +21,7 @@ const Login: React.FC = () => {
               <DefaultInput placeholder="Password" />
             </div>
             <div className="mb-10">
-              <input
-                type="submit"
-                value="Log In"
-                className="w-full cursor-pointer rounded-md border border-primary bg-black px-5 py-3 text-base font-medium text-white transition hover:bg-opacity-90"
-              />
+              <Button type="logInButton">Log In</Button>
             </div>
           </form>
           <p className="mb-2 inline-block text-base text-dark hover:text-primary hover:underline dark:text-black">
