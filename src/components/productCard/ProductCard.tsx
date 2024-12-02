@@ -1,9 +1,19 @@
 import { useState } from "react";
 import ProductModal from "../modals/ProductModal";
 import productImage from "/src/assets/imgMatCard.png";
+import AddToCollectionModal from "../modals/AddToCollectionModal";
 
 export default function ProductCard() {
   const [isProductModalOpen, setProductModalOpen] = useState(false);
+  const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
+
+  const handleProductModalClose = () => {
+    setProductModalOpen(false);
+  };
+
+  const handleCollectionModalClose = () => {
+    setIsCollectionModalOpen(false);
+  };
 
   return (
     <>
@@ -12,7 +22,13 @@ export default function ProductCard() {
         onClick={() => setProductModalOpen(true)}
       >
         {/* Buttons */}
-        <button className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
+        <button
+          className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
+          onClick={(event) => {
+            event.stopPropagation();
+            setIsCollectionModalOpen(true);
+          }}
+        >
           +
         </button>
         <button className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
@@ -36,10 +52,11 @@ export default function ProductCard() {
         </div>
       </li>
 
-      {/* Modal */}
-      {isProductModalOpen && (
-        <ProductModal onClose={() => setProductModalOpen(false)} isFavorite={false} />
+      {/* Modals */}
+      {isProductModalOpen && !isCollectionModalOpen && (
+        <ProductModal onClose={handleProductModalClose} isFavorite={false} />
       )}
+      {isCollectionModalOpen && <AddToCollectionModal onClose={handleCollectionModalClose} />}
     </>
   );
 }
