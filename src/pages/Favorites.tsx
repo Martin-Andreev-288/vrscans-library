@@ -1,5 +1,5 @@
-const Favorites: React.FC = () => {
-  return <div>Favorites</div>;
-};
+import { FavoritesContainer } from "../components";
 
-export default Favorites;
+export default function Favorites() {
+  return <FavoritesContainer />;
+}
