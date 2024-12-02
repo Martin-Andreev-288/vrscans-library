@@ -1,5 +1,5 @@
-const Collections: React.FC = () => {
-  return <div>Collections</div>;
-};
+import { CollectionsContainer } from "../components";
 
-export default Collections;
+export default function Collectionss() {
+  return <CollectionsContainer />;
+}
