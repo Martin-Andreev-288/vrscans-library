@@ -37,7 +37,7 @@ export default function ProductCard() {
       </li>
 
       {/* Modal */}
-      {isModalOpen && <ProductModal onClose={() => setModalOpen(false)} />}
+      {isModalOpen && <ProductModal onClose={() => setModalOpen(false)} isFavorite={false} />}
     </>
   );
 }

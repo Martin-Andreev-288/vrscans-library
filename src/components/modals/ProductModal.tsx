@@ -3,9 +3,10 @@ import productImage from "/src/assets/imgMatCard.png";
 
 type ProductModalProps = {
   onClose: () => void;
+  isFavorite: boolean;
 };
 
-export default function ProductModal({ onClose }: ProductModalProps) {
+export default function ProductModal({ onClose, isFavorite }: ProductModalProps) {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       {/* Modal Card */}
@@ -22,7 +23,7 @@ export default function ProductModal({ onClose }: ProductModalProps) {
             +
           </button>
           <button className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
-            ♡
+            {isFavorite ? "♥" : "♡"}
           </button>
         </div>
 
