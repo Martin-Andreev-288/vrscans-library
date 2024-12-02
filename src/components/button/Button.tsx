@@ -8,7 +8,8 @@ type ButtonProps = {
     | "logInButton"
     | "createCollectionButton"
     | "sortByButton"
-    | "viewItemsButton";
+    | "viewItemsButton"
+    | "editProfileButton";
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
@@ -27,7 +28,8 @@ export default function Button({ children, onClick, type }: ButtonProps) {
     sortByButton:
       "flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none",
     viewItemsButton:
-      "inline-block text-sm rounded-full border-2 border-stone-300 font-semibold uppercase tracking-wide text-stone-400 transition-colors duration-300 hover:bg-stone-300 hover:text-stone-800 focus:bg-stone-300 focus:text-stone-800 focus:outline-none focus:ring focus:ring-stone-200 focus:ring-offset-2 disabled:cursor-not-allowed px-4 py-2.5 md:px-6 md:py-1"
+      "inline-block text-sm rounded-full border-2 border-stone-300 font-semibold uppercase tracking-wide text-stone-400 transition-colors duration-300 hover:bg-stone-300 hover:text-stone-800 focus:bg-stone-300 focus:text-stone-800 focus:outline-none focus:ring focus:ring-stone-200 focus:ring-offset-2 disabled:cursor-not-allowed px-4 py-2.5 md:px-6 md:py-1",
+    editProfileButton: base + " rounded-full px-4 py-2 md:px-5 md:py-2.5 text-xs"
   };
 
   return (
