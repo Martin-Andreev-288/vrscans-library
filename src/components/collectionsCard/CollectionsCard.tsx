@@ -1,6 +1,6 @@
-import { useState } from "react";
 import collectionImage from "/src/assets/imgCollection.png";
 import Button from "../button/Button";
+import { FiTrash } from "react-icons/fi";
 
 export default function CollectionsCard() {
   return (
@@ -8,10 +8,7 @@ export default function CollectionsCard() {
       <li className="relative flex flex-col h-[300px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200">
         {/* Buttons */}
         <button className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
-          +
-        </button>
-        <button className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
-          ♡
+          <FiTrash />
         </button>
 
         {/* Image */}
