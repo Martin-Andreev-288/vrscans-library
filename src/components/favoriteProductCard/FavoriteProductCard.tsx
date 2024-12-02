@@ -1,15 +1,28 @@
 import { useState } from "react";
 import ProductModal from "../modals/ProductModal";
 import productImage from "/src/assets/imgMatCard.png";
+import AddToCollectionModal from "../modals/AddToCollectionModal";
 
 export default function FavoriteProductCard() {
   const [isProductModalOpen, setProductModalOpen] = useState(false);
+  const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
+
+  const handleProductModalClose = () => {
+    setProductModalOpen(false);
+  };
+
+  const handleCollectionModalClose = () => {
+    setIsCollectionModalOpen(false);
+  };
 
   return (
     <>
       <li
         className="relative flex flex-col h-[300px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
-        onClick={() => setProductModalOpen(true)}
+        onClick={(event) => {
+          event.stopPropagation();
+          setIsCollectionModalOpen(true);
+        }}
       >
         {/* Buttons */}
         <button className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
@@ -36,10 +49,11 @@ export default function FavoriteProductCard() {
         </div>
       </li>
 
-      {/* Modal */}
-      {isProductModalOpen && (
-        <ProductModal onClose={() => setProductModalOpen(false)} isFavorite={true} />
+      {/* Modals */}
+      {isProductModalOpen && !isCollectionModalOpen && (
+        <ProductModal onClose={handleProductModalClose} isFavorite={false} />
       )}
+      {isCollectionModalOpen && <AddToCollectionModal onClose={handleCollectionModalClose} />}
     </>
   );
 }
