@@ -27,7 +27,7 @@ const HomeLayout: React.FC = () => {
       {/* Sidebar and Main Content */}
       <div className="w-full max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4 mt-4">
         {/* Left Sidebar */}
-        <aside className="bg-gray-100 p-4 rounded-lg shadow-md">{sidebarContent}</aside>
+        <aside>{sidebarContent}</aside>
 
         {/* Main Content */}
         <main className="bg-white p-4 rounded-lg shadow-md">
