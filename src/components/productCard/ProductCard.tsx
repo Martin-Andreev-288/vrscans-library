@@ -3,13 +3,13 @@ import ProductModal from "../modals/ProductModal";
 import productImage from "/src/assets/imgMatCard.png";
 
 export default function ProductCard() {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isProductModalOpen, setProductModalOpen] = useState(false);
 
   return (
     <>
       <li
         className="relative flex flex-col h-[300px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
-        onClick={() => setModalOpen(true)}
+        onClick={() => setProductModalOpen(true)}
       >
         {/* Buttons */}
         <button className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
@@ -37,7 +37,9 @@ export default function ProductCard() {
       </li>
 
       {/* Modal */}
-      {isModalOpen && <ProductModal onClose={() => setModalOpen(false)} isFavorite={false} />}
+      {isProductModalOpen && (
+        <ProductModal onClose={() => setProductModalOpen(false)} isFavorite={false} />
+      )}
     </>
   );
 }
