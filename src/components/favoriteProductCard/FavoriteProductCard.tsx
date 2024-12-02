@@ -2,7 +2,7 @@ import { useState } from "react";
 import ProductModal from "../modals/ProductModal";
 import productImage from "/src/assets/imgMatCard.png";
 
-export default function ProductCard() {
+export default function FavoriteProductCard() {
   const [isModalOpen, setModalOpen] = useState(false);
 
   return (
@@ -16,7 +16,7 @@ export default function ProductCard() {
           +
         </button>
         <button className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
-          ♡
+          ♥
         </button>
 
         {/* Image */}
@@ -37,7 +37,7 @@ export default function ProductCard() {
       </li>
 
       {/* Modal */}
-      {isModalOpen && <ProductModal onClose={() => setModalOpen(false)} isFavorite={false} />}
+      {isModalOpen && <ProductModal onClose={() => setModalOpen(false)} isFavorite={true} />}
     </>
   );
 }
