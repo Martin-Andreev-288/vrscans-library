@@ -1,6 +1,7 @@
 import welcomeImg from "../assets/welcome-page-img-2.png";
 import logo from "../assets/logo.png";
 import Button from "../components/button/Button";
+import { NavLink } from "react-router-dom";
 
 const Welcome: React.FC = () => {
   return (
@@ -16,8 +17,12 @@ const Welcome: React.FC = () => {
             materials via a pre-configured REST API.
           </p>
           <div className="items-center flex">
-            <Button type="welcomeButton">Login / Signup</Button>
-            <Button type="welcomeButton">Explore VRScans</Button>
+            <NavLink to="/login">
+              <Button type="welcomeButton">Login / Signup</Button>
+            </NavLink>
+            <NavLink to="/products">
+              <Button type="welcomeButton">Explore VRScans</Button>
+            </NavLink>
           </div>
         </div>
       </div>
