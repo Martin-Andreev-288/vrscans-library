@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .main {
+    @apply w-full max-w-xl md:max-w-2xl lg:max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4 mt-4;
+  }
+}

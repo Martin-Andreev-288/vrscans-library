@@ -1,8 +1,10 @@
+export { default as Button } from "./button/Button";
 export { default as ProductsFilters } from "./productsFilters/ProductsFilters";
 export { default as ProfileSidebar } from "./profileSidebar/ProfileSidebar";
 export { default as CollectionsSidebar } from "./collectionsSidebar/CollectionsSidebar";
 export { default as ErrorElement } from "./ErrorElement";
 export { default as Navbar } from "./navbar/Navbar";
-export { default as ProductContainer } from "./productContainer/ProductContainer";
-export { default as FavoritesContainer } from "./favorites/FavoritesContainer";
-export { default as CollectionsContainer } from "./collectionsContainer/CollectionsContainer";
+export { default as ProductCard } from "./productCard/ProductCard";
+export { default as FavoriteProductCard } from "./favoriteProductCard/FavoriteProductCard";
+export { default as CollectionsCard } from "./collectionsCard/CollectionsCard";
+export { default as DefaultInput } from "./defaultInput/DefaultInput";
