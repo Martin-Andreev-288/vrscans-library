@@ -1,6 +1,6 @@
 import { useRouteError, Link, isRouteErrorResponse } from "react-router-dom";
 
-const Error: React.FC = () => {
+export default function Error() {
   const error = useRouteError();
 
   if (isRouteErrorResponse(error) && error.status === 404) {
@@ -27,6 +27,4 @@ const Error: React.FC = () => {
       <h4 className="text-center font-bold text-4xl">there was an error...</h4>
     </main>
   );
-};
-
-export default Error;
+}

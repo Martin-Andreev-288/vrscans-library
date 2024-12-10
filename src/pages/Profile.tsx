@@ -1,7 +1,7 @@
 import DefaultInput from "../components/defaultInput/DefaultInput";
 import Button from "../components/button/Button";
 
-const Profile: React.FC = () => {
+export default function Profile() {
   return (
     <div className="flex flex-row items-center h-[90vh]">
       <div className="w-[25vw] h-[45vh] flex flex-col items-center">
@@ -20,6 +20,4 @@ const Profile: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Profile;
+}

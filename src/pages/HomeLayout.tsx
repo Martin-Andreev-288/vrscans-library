@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { ProductsFilters, ProfileSidebar, CollectionsSidebar, Navbar } from "../components";
 
-const HomeLayout: React.FC = () => {
+export default function HomeLayout() {
   const location = useLocation();
   let sidebarContent;
 
@@ -36,6 +36,4 @@ const HomeLayout: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default HomeLayout;
+}

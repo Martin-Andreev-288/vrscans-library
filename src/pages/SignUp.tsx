@@ -3,7 +3,7 @@ import logInImg from "../assets/sign-in-img.png";
 import DefaultInput from "../components/defaultInput/DefaultInput";
 import Button from "../components/button/Button";
 
-const SignUp: React.FC = () => {
+export default function SignUp() {
   return (
     <div className="min-h-screen flex flex-col justify-start items-center">
       <div className="flex flex-col items-left justify-center border-b-4 border-b-black h-[8vh] w-[90vw]">
@@ -34,6 +34,4 @@ const SignUp: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default SignUp;
+}

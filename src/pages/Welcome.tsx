@@ -3,7 +3,7 @@ import logo from "../assets/logo.png";
 import Button from "../components/button/Button";
 import { NavLink } from "react-router-dom";
 
-const Welcome: React.FC = () => {
+export default function Welcome() {
   return (
     <div
       className="flex flex-col items-center justify-between min-h-screen bg-cover bg-top"
@@ -31,6 +31,4 @@ const Welcome: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Welcome;
+}
