@@ -1,7 +1,7 @@
 export { default as Button } from "./button/Button";
-export { default as ProductsFilters } from "./productsFilters/ProductsFilters";
-export { default as ProfileSidebar } from "./profileSidebar/ProfileSidebar";
-export { default as CollectionsSidebar } from "./collectionsSidebar/CollectionsSidebar";
+export { default as ProductsFilters } from "./leftSidebars/ProductsFilters";
+export { default as ProfileSidebar } from "./leftSidebars/ProfileSidebar";
+export { default as CollectionsSidebar } from "./leftSidebars/CollectionsSidebar";
 export { default as ErrorElement } from "./ErrorElement";
 export { default as Navbar } from "./navbar/Navbar";
 export { default as ProductCard } from "./productCard/ProductCard";
