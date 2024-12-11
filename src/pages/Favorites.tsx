@@ -1,21 +1,24 @@
-import { FavoriteProductCard, ProductsFilters } from "../components";
+import { NavLink } from "react-router-dom";
+import { FavoriteProductCard, ProductsFilters, Button } from "../components";
+import GenericPage from "./GenericPage";
 
 export default function Favorites() {
-  const products = Array(12).fill(null);
+  const favProducts = Array(12).fill(null);
+  const emptyPageText =
+    "Your favorites list is empty! ☹️ Start exploring and save your top scans now!";
 
   return (
-    <div className="main">
-      <aside>
-        <ProductsFilters />
-      </aside>
-      <div className="p-2">
-        <h1 className="text-2xl font-bold mb-6 text-center">Favorites</h1>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-          {products.map((_, index) => (
-            <FavoriteProductCard key={index} />
-          ))}
-        </ul>
-      </div>
-    </div>
+    <GenericPage
+      SidebarComponent={ProductsFilters}
+      title="Favorites"
+      items={favProducts}
+      ComponentCard={FavoriteProductCard}
+      emptyPageText={emptyPageText}
+      navButton={
+        <NavLink to="/products">
+          <Button type="navButton">Begin Your VRS Journey</Button>
+        </NavLink>
+      }
+    />
   );
 }
