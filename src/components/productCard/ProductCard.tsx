@@ -1,9 +1,13 @@
 import { useState } from "react";
 import ProductModal from "../modals/ProductModal";
-import productImage from "/src/assets/imgMatCard.png";
 import AddToCollectionModal from "../modals/AddToCollectionModal";
 
-export default function ProductCard() {
+type ProductCardProps = {
+  name: string;
+  thumb: string;
+};
+
+export default function ProductCard({ name, thumb }: ProductCardProps) {
   const [isProductModalOpen, setProductModalOpen] = useState(false);
   const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
 
@@ -37,14 +41,14 @@ export default function ProductCard() {
 
         {/* Image */}
         <img
-          src={productImage}
+          src={thumb}
           alt="image not found"
           className="w-full h-40 object-fill rounded-md mb-4"
         />
 
         {/* Content */}
         <div className="text-center">
-          <h3 className="text-lg font-semibold mb-2">Cnv82</h3>
+          <h3 className="text-lg font-semibold mb-2">{name}</h3>
           <ul className="text-left text-sm">
             <li className="pl-2">Fabric</li>
             <li className="pl-2">Manufacturer: Handy Living</li>
