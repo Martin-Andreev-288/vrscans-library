@@ -5,9 +5,11 @@ import AddToCollectionModal from "../modals/AddToCollectionModal";
 type ProductCardProps = {
   name: string;
   thumb: string;
+  material: string;
+  manufacturer: string;
 };
 
-export default function ProductCard({ name, thumb }: ProductCardProps) {
+export default function ProductCard({ name, thumb, material, manufacturer }: ProductCardProps) {
   const [isProductModalOpen, setProductModalOpen] = useState(false);
   const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
 
@@ -50,8 +52,8 @@ export default function ProductCard({ name, thumb }: ProductCardProps) {
         <div className="text-center">
           <h3 className="text-lg font-semibold mb-2">{name}</h3>
           <ul className="text-left text-sm">
-            <li className="pl-2">Fabric</li>
-            <li className="pl-2">Manufacturer: Handy Living</li>
+            <li className="pl-2">{material}</li>
+            <li className="pl-2">Manufacturer: {manufacturer}</li>
           </ul>
         </div>
       </li>

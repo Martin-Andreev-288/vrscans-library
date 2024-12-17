@@ -1,4 +1,4 @@
-type GenericPageProps<T> = {
+type GenericPageProps<T extends object> = {
   SidebarComponent: React.FC;
   title: string;
   items: T[];
@@ -7,7 +7,7 @@ type GenericPageProps<T> = {
   navButton?: React.ReactNode;
 };
 
-export default function GenericPage<T>({
+export default function GenericPage<T extends object>({
   SidebarComponent,
   title,
   items,
