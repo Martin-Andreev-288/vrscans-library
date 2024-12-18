@@ -8,12 +8,14 @@ export default function Products() {
   const [products, setProducts] = useState<VRScan[]>([]);
   const [materials, setMaterials] = useState<Material[]>([]);
   const [manufacturers, setManufacturers] = useState<Manufacturer[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const emptyPageText = "No VRScans match your filter ❌ Please modify your search and try again";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const [vrscansResponse, materialsResponse, manufacturersResponse] = await Promise.all([
           apiClient.get<VRScan[]>("/vrscans"),
           apiClient.get<Material[]>("/materials"),
@@ -24,7 +26,9 @@ export default function Products() {
         setMaterials(materialsResponse.data);
         setManufacturers(manufacturersResponse.data);
       } catch (error) {
-        console.log("Houston, we have a problem");
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -44,6 +48,7 @@ export default function Products() {
       }))}
       ComponentCard={ProductCard}
       emptyPageText={emptyPageText}
+      isLoading={isLoading}
     />
   );
 }

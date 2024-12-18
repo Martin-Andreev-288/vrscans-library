@@ -1,3 +1,5 @@
+import { Loader } from "../components";
+
 type GenericPageProps<T extends object> = {
   SidebarComponent: React.FC;
   title: string;
@@ -5,6 +7,7 @@ type GenericPageProps<T extends object> = {
   ComponentCard: React.FC<T>;
   emptyPageText: string;
   navButton?: React.ReactNode;
+  isLoading?: boolean;
 };
 
 export default function GenericPage<T extends object>({
@@ -13,8 +16,13 @@ export default function GenericPage<T extends object>({
   items,
   ComponentCard,
   emptyPageText,
-  navButton
+  navButton,
+  isLoading
 }: GenericPageProps<T>) {
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="main">
       <aside>

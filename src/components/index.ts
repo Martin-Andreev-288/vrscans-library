@@ -8,3 +8,4 @@ export { default as ProductCard } from "./productCard/ProductCard";
 export { default as FavoriteProductCard } from "./favoriteProductCard/FavoriteProductCard";
 export { default as CollectionsCard } from "./collectionsCard/CollectionsCard";
 export { default as DefaultInput } from "./defaultInput/DefaultInput";
+export { default as Loader } from "./loader/Loader";
