@@ -40,20 +40,27 @@ export default function Products() {
     <GenericPage
       SidebarComponent={ProductsFilters}
       title="Product Library"
-      items={products.map((product) => ({
-        ...product,
-        material:
-          materials.find((m) => m.id === product.materialTypeId)?.name || "Unknown Material",
-        manufacturer:
-          manufacturers.find((m) => m.id === product.manufacturerId)?.name ||
-          "Unknown Manufacturer",
-        industries: updateProperty(product.industries, industryMap, "Industries"),
-        colors: updateProperty(product.colors, colorMap, "Colors"),
-        tags: updateProperty(product.tags, tagMap, "Tags")
-      }))}
-      ComponentCard={ProductCard}
       emptyPageText={emptyPageText}
       isLoading={isLoading}
-    />
+    >
+      {products.map((product) => (
+        <ProductCard
+          key={product.id}
+          name={product.name}
+          thumb={product.thumb}
+          fileName={product.fileName}
+          material={
+            materials.find((m) => m.id === product.materialTypeId)?.name || "Unknown Material"
+          }
+          manufacturer={
+            manufacturers.find((m) => m.id === product.manufacturerId)?.name ||
+            "Unknown Manufacturer"
+          }
+          industries={updateProperty(product.industries, industryMap, "Industries")}
+          colors={updateProperty(product.colors, colorMap, "Colors")}
+          tags={updateProperty(product.tags, tagMap, "Tags")}
+        />
+      ))}
+    </GenericPage>
   );
 }

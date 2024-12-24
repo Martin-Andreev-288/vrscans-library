@@ -1,24 +1,22 @@
 import { Loader } from "../components";
 
-type GenericPageProps<T extends object> = {
+type GenericPageProps = {
   SidebarComponent: React.FC;
   title: string;
-  items: T[];
-  ComponentCard: React.FC<T>;
   emptyPageText: string;
   navButton?: React.ReactNode;
   isLoading?: boolean;
+  children?: React.ReactNode;
 };
 
-export default function GenericPage<T extends object>({
+export default function GenericPage({
   SidebarComponent,
   title,
-  items,
-  ComponentCard,
   emptyPageText,
   navButton,
-  isLoading
-}: GenericPageProps<T>) {
+  isLoading,
+  children
+}: GenericPageProps) {
   if (isLoading) {
     return <Loader />;
   }
@@ -30,11 +28,9 @@ export default function GenericPage<T extends object>({
       </aside>
       <div className="p-2">
         <h1 className="text-2xl font-bold mb-6 text-center">{title}</h1>
-        {items.length ? (
+        {children ? (
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-            {items.map((item, index) => (
-              <ComponentCard key={index} {...item} />
-            ))}
+            {children}
           </ul>
         ) : (
           <>
