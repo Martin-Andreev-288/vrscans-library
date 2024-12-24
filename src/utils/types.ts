@@ -30,3 +30,31 @@ export type Manufacturer = {
   logo_updated_at: string;
   website: string;
 };
+
+export type Industry = {
+  id: number;
+  name: string;
+  vrscan_id: number;
+};
+
+export type Color = {
+  id: number;
+  hex: string;
+  key: string;
+  name: string;
+  colorable_id: number;
+};
+
+export type Tag = {
+  id: number;
+  name: string;
+  taggable_id: number;
+};
+
+export type DataContextType = {
+  materials: Material[];
+  colors: Color[];
+  tags: Tag[];
+  isLoading: boolean;
+  error: string | null;
+};

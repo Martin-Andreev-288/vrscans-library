@@ -1,12 +1,18 @@
 import { FaTimes } from "react-icons/fa";
-import productImage from "/src/assets/imgMatCard.png";
+import { type ProductCardProps } from "../productCard/ProductCard";
 
 type ProductModalProps = {
   onClose: () => void;
   isFavorite: boolean;
 };
 
-export default function ProductModal({ onClose, isFavorite }: ProductModalProps) {
+export default function ProductModal({
+  onClose,
+  isFavorite,
+  ...props
+}: ProductModalProps & ProductCardProps) {
+  const { name, thumb, fileName, material, manufacturer } = props;
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       {/* Modal Card */}
@@ -14,7 +20,7 @@ export default function ProductModal({ onClose, isFavorite }: ProductModalProps)
         {/* Left Section - Image */}
         <div className="relative w-1/2 flex items-end justify-center">
           <img
-            src={productImage}
+            src={thumb}
             alt="image not found"
             className="w-[80%] h-auto object-cover rounded-md mb-4"
           />
@@ -39,18 +45,9 @@ export default function ProductModal({ onClose, isFavorite }: ProductModalProps)
 
           {/* Product Details */}
           <div className="text-center">
-            <h2 className="text-xl font-semibold mb-4">Cnv82</h2>
+            <h2 className="text-xl font-semibold mb-4">{name}</h2>
             <p className="text-sm mb-2">
-              <span className="font-bold">Filename:</span> cnv82.vrscan
-            </p>
-            <p className="text-sm mb-2">
-              <span className="font-bold">Material Type:</span> Fabric
-            </p>
-            <p className="text-sm mb-2">
-              <span className="font-bold">Manufacturer:</span> Handy Living
-            </p>
-            <p className="text-sm mb-2">
-              <span className="font-bold">Industries:</span> Interior Design
+              <span className="font-bold">Material Type:</span> {material}
             </p>
             <p className="text-sm mb-2">
               <span className="font-bold">Colors:</span> Beige
@@ -59,10 +56,13 @@ export default function ProductModal({ onClose, isFavorite }: ProductModalProps)
               <span className="font-bold">Tags:</span> V-Ray Next Recommended
             </p>
             <p className="text-sm mb-2">
-              <span className="font-bold">Material File Size:</span> 0
+              <span className="font-bold">Manufacturer:</span> {manufacturer}
             </p>
             <p className="text-sm mb-2">
-              <span className="font-bold">Created At:</span> August 20, 2020
+              <span className="font-bold">Industries:</span> Interior Design
+            </p>
+            <p className="text-sm mb-2">
+              <span className="font-bold">Filename:</span> {fileName}
             </p>
           </div>
         </div>

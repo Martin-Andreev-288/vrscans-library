@@ -11,6 +11,7 @@ import {
   Error
 } from "./pages";
 import { ErrorElement } from "./components";
+import { DataProvider } from "./context/DataContext";
 
 const router = createBrowserRouter([
   {
@@ -58,5 +59,9 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <DataProvider>
+      <RouterProvider router={router} />
+    </DataProvider>
+  );
 }

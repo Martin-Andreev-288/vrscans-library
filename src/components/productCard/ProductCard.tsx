@@ -2,14 +2,21 @@ import { useState } from "react";
 import ProductModal from "../modals/ProductModal";
 import AddToCollectionModal from "../modals/AddToCollectionModal";
 
-type ProductCardProps = {
+export type ProductCardProps = {
   name: string;
   thumb: string;
+  fileName: string;
   material: string;
   manufacturer: string;
 };
 
-export default function ProductCard({ name, thumb, material, manufacturer }: ProductCardProps) {
+export default function ProductCard({
+  name,
+  thumb,
+  fileName,
+  material,
+  manufacturer
+}: ProductCardProps) {
   const [isProductModalOpen, setProductModalOpen] = useState(false);
   const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
 
@@ -60,7 +67,15 @@ export default function ProductCard({ name, thumb, material, manufacturer }: Pro
 
       {/* Modals */}
       {isProductModalOpen && !isCollectionModalOpen && (
-        <ProductModal onClose={handleProductModalClose} isFavorite={false} />
+        <ProductModal
+          onClose={handleProductModalClose}
+          isFavorite={false}
+          thumb={thumb}
+          name={name}
+          material={material}
+          manufacturer={manufacturer}
+          fileName={fileName}
+        />
       )}
       {isCollectionModalOpen && <AddToCollectionModal onClose={handleCollectionModalClose} />}
     </>
