@@ -5,7 +5,8 @@ import GenericPage from "./GenericPage";
 import { type VRScan } from "../utils/types";
 
 export default function Products() {
-  const { vrscans, materials, manufacturers, isLoading } = useDataContext();
+  const { vrscans, materials, manufacturers, industries, colors, tags, isLoading } =
+    useDataContext();
   const [products, setProducts] = useState<VRScan[]>([]);
 
   const emptyPageText = "No VRScans match your filter ❌ Please modify your search and try again";
@@ -13,6 +14,27 @@ export default function Products() {
   useEffect(() => {
     setProducts(vrscans);
   }, [vrscans]);
+
+  function createDictionary<T extends { id: number; name: string }>(
+    array: T[]
+  ): Record<number, string> {
+    return array.reduce((acc: Record<number, string>, item) => {
+      acc[item.id] = item.name;
+      return acc;
+    }, {});
+  }
+
+  const industryMap = createDictionary(industries);
+  const colorMap = createDictionary(colors);
+  const tagMap = createDictionary(tags);
+
+  function updateProperty(
+    array: number[],
+    map: Record<number, string>,
+    propertyName: string
+  ): string {
+    return array.length ? array.map((id) => map[id]).join(", ") : `Unknown ${propertyName}`;
+  }
 
   return (
     <GenericPage
@@ -23,7 +45,11 @@ export default function Products() {
         material:
           materials.find((m) => m.id === product.materialTypeId)?.name || "Unknown Material",
         manufacturer:
-          manufacturers.find((m) => m.id === product.manufacturerId)?.name || "Unknown Manufacturer"
+          manufacturers.find((m) => m.id === product.manufacturerId)?.name ||
+          "Unknown Manufacturer",
+        industries: updateProperty(product.industries, industryMap, "Industries"),
+        colors: updateProperty(product.colors, colorMap, "Colors"),
+        tags: updateProperty(product.tags, tagMap, "Tags")
       }))}
       ComponentCard={ProductCard}
       emptyPageText={emptyPageText}

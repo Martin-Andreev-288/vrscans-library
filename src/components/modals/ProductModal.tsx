@@ -11,7 +11,7 @@ export default function ProductModal({
   isFavorite,
   ...props
 }: ProductModalProps & ProductCardProps) {
-  const { name, thumb, fileName, material, manufacturer } = props;
+  const { name, thumb, fileName, material, manufacturer, colors, tags, industries } = props;
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -50,16 +50,16 @@ export default function ProductModal({
               <span className="font-bold">Material Type:</span> {material}
             </p>
             <p className="text-sm mb-2">
-              <span className="font-bold">Colors:</span> Beige
+              <span className="font-bold">Colors:</span> {colors}
             </p>
             <p className="text-sm mb-2">
-              <span className="font-bold">Tags:</span> V-Ray Next Recommended
+              <span className="font-bold">Tags:</span> {tags}
             </p>
             <p className="text-sm mb-2">
               <span className="font-bold">Manufacturer:</span> {manufacturer}
             </p>
             <p className="text-sm mb-2">
-              <span className="font-bold">Industries:</span> Interior Design
+              <span className="font-bold">Industries:</span> {industries}
             </p>
             <p className="text-sm mb-2">
               <span className="font-bold">Filename:</span> {fileName}

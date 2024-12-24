@@ -8,6 +8,9 @@ export type ProductCardProps = {
   fileName: string;
   material: string;
   manufacturer: string;
+  colors: string;
+  tags: string;
+  industries: string;
 };
 
 export default function ProductCard({
@@ -15,7 +18,10 @@ export default function ProductCard({
   thumb,
   fileName,
   material,
-  manufacturer
+  manufacturer,
+  colors,
+  tags,
+  industries
 }: ProductCardProps) {
   const [isProductModalOpen, setProductModalOpen] = useState(false);
   const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
@@ -75,6 +81,9 @@ export default function ProductCard({
           material={material}
           manufacturer={manufacturer}
           fileName={fileName}
+          colors={colors}
+          tags={tags}
+          industries={industries}
         />
       )}
       {isCollectionModalOpen && <AddToCollectionModal onClose={handleCollectionModalClose} />}
