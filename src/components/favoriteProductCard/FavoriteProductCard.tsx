@@ -54,7 +54,18 @@ export default function FavoriteProductCard() {
 
       {/* Modals */}
       {isProductModalOpen && !isCollectionModalOpen && (
-        <ProductModal onClose={handleProductModalClose} isFavorite={false} />
+        <ProductModal
+          onClose={handleProductModalClose}
+          isFavorite={false}
+          thumb={productImage}
+          name="Cnv82"
+          material="Fabric"
+          manufacturer="Handy Living"
+          fileName="hnlt_25_s.vrscan"
+          colors="blue"
+          tags="V-Ray Next Recommended"
+          industries="Interior Design"
+        />
       )}
       {isCollectionModalOpen && <AddToCollectionModal onClose={handleCollectionModalClose} />}
     </>
