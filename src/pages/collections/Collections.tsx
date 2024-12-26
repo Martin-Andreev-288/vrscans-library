@@ -1,6 +1,6 @@
-import { CollectionsCard, CollectionsSidebar } from "../components";
-import GenericPage from "./GenericPage";
-import { useDataContext } from "../context/DataContext";
+import { CollectionsCard, CollectionsSidebar } from "../../components";
+import GenericPage from "../genericPage/GenericPage";
+import { useDataContext } from "../../context/DataContext";
 
 export default function Collections() {
   const { isLoading } = useDataContext();

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useDataContext } from "../context/DataContext";
-import { ProductCard, ProductsFilters } from "../components";
-import GenericPage from "./GenericPage";
-import { type VRScan } from "../utils/types";
+import { useDataContext } from "../../context/DataContext";
+import { ProductCard, ProductsFilters } from "../../components";
+import GenericPage from "../genericPage/GenericPage";
+import { type VRScan } from "../../utils/types";
 
 export default function Products() {
   const { vrscans, materials, manufacturers, industries, colors, tags, isLoading } =

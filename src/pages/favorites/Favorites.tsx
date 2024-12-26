@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import { FavoriteProductCard, ProductsFilters, Button } from "../components";
-import GenericPage from "./GenericPage";
-import { useDataContext } from "../context/DataContext";
+import { FavoriteProductCard, ProductsFilters, Button } from "../../components";
+import GenericPage from "../genericPage/GenericPage";
+import { useDataContext } from "../../context/DataContext";
 
 export default function Favorites() {
   const { isLoading } = useDataContext();

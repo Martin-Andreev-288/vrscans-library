@@ -1,6 +1,6 @@
-import welcomeImg from "../assets/welcome-page-img-2.png";
-import logo from "../assets/logo.png";
-import Button from "../components/button/Button";
+import welcomeImg from "../../assets/welcome-page-img-2.png";
+import logo from "../../assets/logo.png";
+import Button from "../../components/button/Button";
 import { NavLink } from "react-router-dom";
 
 export default function Welcome() {
