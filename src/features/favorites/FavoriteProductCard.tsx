@@ -1,7 +1,7 @@
 import { useState } from "react";
-import ProductModal from "../modals/ProductModal";
+import ProductModal from "../products/ProductModal";
 import productImage from "/src/assets/imgMatCard.png";
-import AddToCollectionModal from "../modals/AddToCollectionModal";
+import AddToCollectionModal from "../collections/AddToCollectionModal";
 
 export default function FavoriteProductCard() {
   const [isProductModalOpen, setProductModalOpen] = useState(false);

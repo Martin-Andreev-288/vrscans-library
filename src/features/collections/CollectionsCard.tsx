@@ -1,5 +1,5 @@
 import collectionImage from "/src/assets/imgCollection.png";
-import Button from "../button/Button";
+import { Button } from "../../components";
 import { FiTrash } from "react-icons/fi";
 
 export default function CollectionsCard() {

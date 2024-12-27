@@ -1,5 +1,5 @@
 import { FaTimes } from "react-icons/fa";
-import { type ProductCardProps } from "../productCard/ProductCard";
+import { type ProductCardProps } from "./ProductCard";
 
 type ProductModalProps = {
   onClose: () => void;

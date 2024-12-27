@@ -1,4 +1,4 @@
-import { CollectionsCard, CollectionsSidebar } from "../../components";
+import { CollectionsCard, CollectionsSidebar } from "../../features";
 import GenericPage from "../genericPage/GenericPage";
 import { useDataContext } from "../../context/DataContext";
 

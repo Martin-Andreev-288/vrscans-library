@@ -1,4 +1,4 @@
-import Button from "../button/Button";
+import Button from "../../components/button/Button";
 import productImage from "/src/assets/profileImg.png";
 import { FaEdit } from "react-icons/fa";
 

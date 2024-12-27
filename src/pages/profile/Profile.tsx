@@ -1,4 +1,5 @@
-import { DefaultInput, Button, ProfileSidebar } from "../../components";
+import { DefaultInput, Button } from "../../components";
+import { ProfileSidebar } from "../../features";
 
 export default function Profile() {
   return (

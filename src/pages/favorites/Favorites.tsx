@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { FavoriteProductCard, ProductsFilters, Button } from "../../components";
+import { Button } from "../../components";
+import { FavoriteProductCard, ProductsFilters } from "../../features";
 import GenericPage from "../genericPage/GenericPage";
 import { useDataContext } from "../../context/DataContext";
 

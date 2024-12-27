@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ProductModal from "../modals/ProductModal";
-import AddToCollectionModal from "../modals/AddToCollectionModal";
+import ProductModal from "./ProductModal";
+import AddToCollectionModal from "../collections/AddToCollectionModal";
 
 export type ProductCardProps = {
   name: string;

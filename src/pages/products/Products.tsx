@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDataContext } from "../../context/DataContext";
-import { ProductCard, ProductsFilters } from "../../components";
+import { ProductCard, ProductsFilters } from "../../features";
 import GenericPage from "../genericPage/GenericPage";
 import { type VRScan } from "../../utils/types";
 
