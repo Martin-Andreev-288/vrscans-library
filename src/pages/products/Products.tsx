@@ -1,19 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDataContext } from "../../context/DataContext";
 import { ProductCard, ProductsFilters } from "../../features";
 import GenericPage from "../genericPage/GenericPage";
-import { type VRScan } from "../../utils/types";
 
 export default function Products() {
-  const { vrscans, materials, manufacturers, industries, colors, tags, isLoading } =
+  const { vrscans, updateVrscans, materials, manufacturers, industries, colors, tags, isLoading } =
     useDataContext();
-  const [products, setProducts] = useState<VRScan[]>([]);
 
   const emptyPageText = "No VRScans match your filter ❌ Please modify your search and try again";
 
   useEffect(() => {
-    setProducts(vrscans);
-  }, [vrscans]);
+    updateVrscans();
+    console.log(vrscans);
+  }, []);
 
   function createDictionary<T extends { id: number; name: string }>(
     array: T[]
@@ -43,7 +42,7 @@ export default function Products() {
       emptyPageText={emptyPageText}
       isLoading={isLoading}
     >
-      {products.map((product) => (
+      {vrscans.map((product) => (
         <ProductCard
           key={product.id}
           name={product.name}

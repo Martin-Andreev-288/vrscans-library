@@ -9,8 +9,9 @@ import {
   type Tag
 } from "../utils/types";
 
-interface DataContextType {
+type DataContextType = {
   vrscans: VRScan[];
+  updateVrscans: () => Promise<void>;
   materials: Material[];
   manufacturers: Manufacturer[];
   industries: Industry[];
@@ -18,7 +19,7 @@ interface DataContextType {
   tags: Tag[];
   isLoading: boolean;
   error: string | null;
-}
+};
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
@@ -32,20 +33,32 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  async function updateVrscans(): Promise<void> {
+    setIsLoading(true);
+    try {
+      const vrscansResponse = await apiClient.get<VRScan[]>("/vrscans");
+      setVrscans(vrscansResponse.data);
+      setError(null);
+    } catch (error) {
+      console.error("Failed to fetch VRScans:", error);
+      setError("Failed to fetch VRScans");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
 
         const [
-          vrscansResponse,
           materialsResponse,
           manufacturersResponse,
           industriesResponse,
           colorsResponse,
           tagsResponse
         ] = await Promise.all([
-          apiClient.get<VRScan[]>("/vrscans"),
           apiClient.get<Material[]>("/materials"),
           apiClient.get<Manufacturer[]>("/manufacturers"),
           apiClient.get<Industry[]>("/industries"),
@@ -53,7 +66,6 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
           apiClient.get<Tag[]>("/tags")
         ]);
 
-        setVrscans(vrscansResponse.data);
         setMaterials(materialsResponse.data);
         setManufacturers(manufacturersResponse.data);
         setIndustries(industriesResponse.data);
@@ -73,6 +85,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     <DataContext.Provider
       value={{
         vrscans,
+        updateVrscans,
         materials,
         manufacturers,
         industries,
