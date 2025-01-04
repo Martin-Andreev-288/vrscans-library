@@ -1,54 +1,40 @@
+import { useState } from "react";
+import { useDataContext } from "../../context/DataContext";
+import { FilterSection } from "../../components";
+
 export default function ProductsFilters() {
-  const filterCards = [
-    {
-      title: "Materials",
-      options: ["Fabric", "Paint", "Metal", "Plastic"]
-    },
-    {
-      title: "Colors",
-      options: ["Black", "Red", "Blue", "Green"]
-    },
-    {
-      title: "Tags",
-      options: ["Glossy", "Rust", "Matte", "Brushed"]
-    }
-  ];
+  const { materials, colors, tags } = useDataContext();
+  const [expandedFilter, setExpandedFilter] = useState<string | null>(null);
+
+  // Extract options for each filter
+  const materialOptions = materials.map((material) => material.name);
+  const colorOptions = colors.map((color) => color.name);
+  const tagOptions = tags.map((tag) => tag.name);
+
+  const toggleFilter = (filter: string) => {
+    setExpandedFilter(expandedFilter === filter ? null : filter);
+  };
 
   return (
     <div className="space-y-6">
-      {filterCards.map((card, index) => (
-        <div key={index} className="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-          {/* Card Title */}
-          <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
-
-          {/* Separator */}
-          <hr className="border-gray-300 mb-4" />
-
-          {/* Options */}
-          <ul className="space-y-2">
-            {card.options.map((option, i) => (
-              <li key={i} className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id={`${card.title}-${i}`}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                  disabled
-                />
-                <label htmlFor={`${card.title}-${i}`} className="text-sm text-gray-700">
-                  {option}
-                </label>
-              </li>
-            ))}
-          </ul>
-
-          {/* View All Button */}
-          <div className="text-right mt-4">
-            <button className="text-blue-500 text-sm hover:underline" disabled>
-              View All...
-            </button>
-          </div>
-        </div>
-      ))}
+      <FilterSection
+        title="Materials"
+        options={materialOptions}
+        isOpen={expandedFilter === "Materials"}
+        onToggle={() => toggleFilter("Materials")}
+      />
+      <FilterSection
+        title="Colors"
+        options={colorOptions}
+        isOpen={expandedFilter === "Colors"}
+        onToggle={() => toggleFilter("Colors")}
+      />
+      <FilterSection
+        title="Tags"
+        options={tagOptions}
+        isOpen={expandedFilter === "Tags"}
+        onToggle={() => toggleFilter("Tags")}
+      />
     </div>
   );
 }
