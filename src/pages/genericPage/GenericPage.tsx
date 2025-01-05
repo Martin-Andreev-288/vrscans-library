@@ -23,11 +23,11 @@ export default function GenericPage({
 
   return (
     <div className="main">
-      <aside>
+      <aside className="pt-14">
         <SidebarComponent />
       </aside>
-      <div className="p-2">
-        <h1 className="text-2xl font-bold mb-6 text-center">{title}</h1>
+      <div className="p-2 pt-0">
+        <h1 className="text-xl font-bold mb-6 text-center">{title}</h1>
         {children ? (
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
             {children}

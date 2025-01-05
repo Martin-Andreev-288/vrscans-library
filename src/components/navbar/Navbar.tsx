@@ -6,12 +6,12 @@ export default function Navbar() {
   let isLoggedIn = true;
 
   return (
-    <nav className="flex items-center justify-between">
+    <nav className="flex items-center justify-between border-b-4 border-b-black pb-4">
       <div>
         <Logo />
       </div>
       {isLoggedIn ? (
-        <ul className="flex items-center gap-16">
+        <ul className="flex items-center gap-7">
           <li>
             <NavLink to="/favorites">
               <Button type="navButton">Favorites</Button>

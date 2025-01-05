@@ -3,7 +3,7 @@ import { Navbar } from "../../components";
 
 export default function HomeLayout() {
   return (
-    <div className="flex flex-col items-center pt-9">
+    <div className="flex flex-col items-center pt-5">
       {/* Navbar */}
       <nav className="w-full max-w-xl md:max-w-2xl lg:max-w-5xl mx-auto">
         <Navbar />
