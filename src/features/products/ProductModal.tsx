@@ -1,5 +1,6 @@
 import { FaTimes } from "react-icons/fa";
 import { type ProductCardProps } from "./ProductCard";
+import { createPortal } from "react-dom";
 
 type ProductModalProps = {
   onClose: () => void;
@@ -13,7 +14,7 @@ export default function ProductModal({
 }: ProductModalProps & ProductCardProps) {
   const { name, thumb, fileName, material, manufacturer, colors, tags, industries } = props;
 
-  return (
+  const modalContent = (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       {/* Modal Card */}
       <div className="bg-white rounded-lg shadow-lg w-[90%] max-w-4xl p-4 flex">
@@ -69,4 +70,6 @@ export default function ProductModal({
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.getElementById("modal-root")!);
 }
