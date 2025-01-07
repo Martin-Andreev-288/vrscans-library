@@ -37,7 +37,7 @@ export default function ProductCard({
   return (
     <>
       <li
-        className="relative flex flex-col h-[300px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
+        className="relative flex flex-col h-[320px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
         onClick={() => setProductModalOpen(true)}
       >
         {/* Buttons */}
