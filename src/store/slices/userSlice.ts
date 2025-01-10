@@ -12,14 +12,17 @@ type UserState = {
   error: string | null;
 };
 
-// Initial state
+const getUserFromStorage = (): User | null => {
+  const user = sessionStorage.getItem("user");
+  return user ? JSON.parse(user) : null;
+};
+
 const initialState: UserState = {
-  user: null,
+  user: getUserFromStorage(),
   status: "idle",
   error: null
 };
 
-// Async thunk to fetch user
 export const fetchUser = createAsyncThunk<User, number, { rejectValue: string }>(
   "user/fetchUser",
   async (id, { rejectWithValue }) => {
@@ -32,16 +35,17 @@ export const fetchUser = createAsyncThunk<User, number, { rejectValue: string }>
   }
 );
 
-// Slice definition
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     loginUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
+      sessionStorage.setItem("user", JSON.stringify(action.payload));
     },
     logoutUser: (state) => {
       state.user = null;
+      sessionStorage.removeItem("user");
     }
   },
   extraReducers: (builder) => {
