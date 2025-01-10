@@ -1,6 +1,8 @@
 import { FaTimes } from "react-icons/fa";
 import { type ProductCardProps } from "./ProductCard";
 import { createPortal } from "react-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 type ProductModalProps = {
   onClose: () => void;
@@ -14,6 +16,8 @@ export default function ProductModal({
 }: ProductModalProps & ProductCardProps) {
   const { name, thumb, fileName, material, manufacturer, colors, tags, industries } = props;
 
+  const user = useSelector((state: RootState) => state.userState.user);
+
   const modalContent = (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       {/* Modal Card */}
@@ -26,12 +30,16 @@ export default function ProductModal({
             className="w-[80%] h-auto object-cover rounded-md mb-4"
           />
           {/* Buttons */}
-          <button className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
-            +
-          </button>
-          <button className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
-            {isFavorite ? "♥" : "♡"}
-          </button>
+          {user && (
+            <>
+              <button className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
+                +
+              </button>
+              <button className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
+                {isFavorite ? "♥" : "♡"}
+              </button>
+            </>
+          )}
         </div>
 
         {/* Right Section - Description */}

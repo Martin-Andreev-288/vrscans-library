@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
 export default function Navbar() {
-  let isLoggedIn = true;
   const user = useSelector((state: RootState) => state.userState.user);
 
   return (
@@ -13,7 +12,7 @@ export default function Navbar() {
       <div>
         <Logo />
       </div>
-      {isLoggedIn ? (
+      {user ? (
         <ul className="flex items-center gap-7">
           <li>
             <NavLink to="/favorites">
@@ -27,14 +26,16 @@ export default function Navbar() {
           </li>
           <li>
             <NavLink to="/profile">
-              <Button type="navButton">{user?.username}</Button>
+              <Button type="navButton">{user.username}</Button>
             </NavLink>
           </li>
         </ul>
       ) : (
         <ul className="flex items-center gap-16">
           <li>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/login">
+              <Button type="navButton">Login</Button>
+            </NavLink>
           </li>
         </ul>
       )}
