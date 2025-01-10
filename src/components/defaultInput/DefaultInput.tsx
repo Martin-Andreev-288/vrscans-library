@@ -1,12 +1,15 @@
 type DefaultInputProps = {
+  type: string;
+  name: string;
   placeholder: string;
 };
 
-export default function DefaultInput({ placeholder }: DefaultInputProps) {
+export default function DefaultInput({ type, name, placeholder }: DefaultInputProps) {
   return (
     <>
       <input
-        type="text"
+        type={type}
+        name={name}
         placeholder={placeholder}
         className="w-full h-[6vh] bg-transparent rounded-md border border-stroke dark:border-dark-3 py-[10px] px-5 text-dark-6 outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 disabled:border-gray-2"
       />

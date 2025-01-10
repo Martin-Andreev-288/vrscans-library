@@ -2,6 +2,41 @@ import logo from "../../assets/logo.png";
 import logInImg from "../../assets/sign-in-img.png";
 import DefaultInput from "../../components/defaultInput/DefaultInput";
 import Button from "../../components/button/Button";
+import { Form, redirect, NavLink, type ActionFunction } from "react-router-dom";
+import { apiClient } from "../../utils/apiClient";
+import { ToastContainer, toast } from "react-toastify";
+import { type ReduxStore } from "../../store/store";
+import { loginUser } from "../../store/slices/userSlice";
+import { AxiosResponse } from "axios";
+
+export const action =
+  (store: ReduxStore): ActionFunction =>
+  async ({ request }): Promise<Response | null> => {
+    const formData = await request.formData();
+    // const data = Object.fromEntries(formData);
+    const data = {
+      email: formData.get("email"),
+      password: formData.get("password")
+    };
+
+    try {
+      const response: AxiosResponse = await apiClient.post("/login", data);
+      const username = response.data.user.username;
+      const jwt = response.data.jwt;
+      store.dispatch(
+        loginUser({
+          username,
+          jwt
+        })
+      );
+      toast.success("Login successful");
+      return new Promise((resolve) => setTimeout(() => resolve(redirect("/products")), 2000));
+    } catch (error) {
+      console.log(error);
+      toast.error("Login failed");
+      return null;
+    }
+  };
 
 export default function Login() {
   return (
@@ -13,26 +48,29 @@ export default function Login() {
         <img className="h-[45vh] rounded-2xl mr-20" src={logInImg} alt="VR Scan Image" />
         <div className="w-[25vw] h-[45vh] flex flex-col items-center">
           <h2 className="text-4xl font-bold text-black pb-10">Log In</h2>
-          <form>
+          <Form method="POST">
             <div className="pb-3 w-[25vw]">
-              <DefaultInput placeholder="Email" />
+              <DefaultInput type="text" name="email" placeholder="Email" />
             </div>
             <div className="pb-3 w-[25vw]">
-              <DefaultInput placeholder="Password" />
+              <DefaultInput type="password" name="password" placeholder="Password" />
             </div>
             <div className="mb-10">
               <Button type="logInButton">Log In</Button>
             </div>
-          </form>
+          </Form>
           <p className="mb-2 inline-block text-base text-dark hover:text-primary hover:underline dark:text-black">
             Forgot Password?
           </p>
           <p className="text-base text-body-color dark:text-dark-6">
             <span className="pr-0.5 text-gray-400">Not a member yet?</span>
-            <span className="text-primary hover:underline"> Sign Up</span>
+            <span className="text-primary hover:underline">
+              <NavLink to="/signup">Sign Up</NavLink>
+            </span>
           </p>
         </div>
       </div>
+      <ToastContainer position="top-center" />
     </div>
   );
 }

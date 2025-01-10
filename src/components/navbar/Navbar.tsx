@@ -1,9 +1,12 @@
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import Button from "../button/Button";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 export default function Navbar() {
   let isLoggedIn = true;
+  const user = useSelector((state: RootState) => state.userState.user);
 
   return (
     <nav className="flex items-center justify-between border-b-4 border-b-black pb-4">
@@ -24,7 +27,7 @@ export default function Navbar() {
           </li>
           <li>
             <NavLink to="/profile">
-              <Button type="navButton">Username</Button>
+              <Button type="navButton">{user?.username}</Button>
             </NavLink>
           </li>
         </ul>

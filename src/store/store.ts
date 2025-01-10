@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { colorsApi, industriesApi, manufacturersApi, materialsApi, tagsApi } from "./apis";
+import userReducer from "./slices/userSlice";
 
 const store = configureStore({
   reducer: {
@@ -8,7 +9,8 @@ const store = configureStore({
     [industriesApi.reducerPath]: industriesApi.reducer,
     [manufacturersApi.reducerPath]: manufacturersApi.reducer,
     [materialsApi.reducerPath]: materialsApi.reducer,
-    [tagsApi.reducerPath]: tagsApi.reducer
+    [tagsApi.reducerPath]: tagsApi.reducer,
+    userState: userReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

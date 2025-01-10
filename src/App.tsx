@@ -13,6 +13,11 @@ import {
 import { ErrorElement } from "./components";
 import { DataProvider } from "./context/DataContext";
 
+import { action as registerAction } from "./pages/signUp/SignUp";
+import { action as loginAction } from "./pages/login/Login";
+
+import store from "./store/store";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,12 +27,14 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-    errorElement: <Error />
+    errorElement: <Error />,
+    action: loginAction(store)
   },
   {
     path: "/signup",
     element: <SignUp />,
-    errorElement: <Error />
+    errorElement: <Error />,
+    action: registerAction
   },
   {
     path: "/",
