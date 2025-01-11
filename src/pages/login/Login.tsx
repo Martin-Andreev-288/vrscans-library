@@ -4,7 +4,7 @@ import DefaultInput from "../../components/defaultInput/DefaultInput";
 import Button from "../../components/button/Button";
 import { Form, redirect, NavLink, type ActionFunction } from "react-router-dom";
 import { apiClient } from "../../utils/apiClient";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { type ReduxStore } from "../../store/store";
 import { loginUser } from "../../store/slices/userSlice";
 import { AxiosResponse } from "axios";
@@ -29,11 +29,11 @@ export const action =
           jwt
         })
       );
-      toast.success("Login successful");
-      return new Promise((resolve) => setTimeout(() => resolve(redirect("/products")), 2000));
+      toast.success("Login successful", { autoClose: 2000 });
+      return redirect("/products");
     } catch (error) {
       console.log(error);
-      toast.error("Login failed");
+      toast.error("Login failed", { autoClose: 2000 });
       return null;
     }
   };
@@ -70,7 +70,6 @@ export default function Login() {
           </p>
         </div>
       </div>
-      <ToastContainer position="top-center" />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { DefaultInput, Button } from "../../components";
 import { ProfileSidebar } from "../../features";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../store/slices/userSlice";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -12,8 +12,8 @@ export default function Profile() {
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(logoutUser());
-    toast.success("Logout successful!");
-    return new Promise((resolve) => setTimeout(() => resolve(navigate("/")), 2000));
+    toast.success("Logout successful!", { autoClose: 2000 });
+    return navigate("/");
   };
 
   return (
@@ -37,7 +37,6 @@ export default function Profile() {
           </div>
         </form>
       </div>
-      <ToastContainer position="top-center" />
     </div>
   );
 }

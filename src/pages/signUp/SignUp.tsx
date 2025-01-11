@@ -4,7 +4,7 @@ import DefaultInput from "../../components/defaultInput/DefaultInput";
 import Button from "../../components/button/Button";
 import { type ActionFunction, Form, Link, NavLink, redirect } from "react-router-dom";
 import { apiClient } from "../../utils/apiClient";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 
 export const action: ActionFunction = async ({ request }): Promise<Response | null> => {
@@ -18,9 +18,9 @@ export const action: ActionFunction = async ({ request }): Promise<Response | nu
   try {
     await apiClient.post("/register", data);
 
-    toast.success("Successful registration");
+    toast.success("Successful registration", { autoClose: 2000 });
 
-    return new Promise((resolve) => setTimeout(() => resolve(redirect("/login")), 2000));
+    return redirect("/login");
   } catch (error) {
     console.log(error);
 
@@ -30,7 +30,7 @@ export const action: ActionFunction = async ({ request }): Promise<Response | nu
       return null;
     }
 
-    toast.error("Registration failed");
+    toast.error("Registration failed", { autoClose: 2000 });
     return null;
   }
 };
@@ -69,7 +69,6 @@ export default function SignUp() {
           </Form>
         </div>
       </div>
-      <ToastContainer position="top-center" />
     </div>
   );
 }
