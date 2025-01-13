@@ -33,6 +33,7 @@ export default function Products() {
       {vrscans.map((product) => (
         <ProductCard
           key={product.id}
+          item={product}
           name={product.name}
           thumb={product.thumb}
           fileName={product.fileName}

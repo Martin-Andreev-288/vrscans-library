@@ -1,11 +1,14 @@
 import { useState } from "react";
 import ProductModal from "./ProductModal";
 import AddToCollectionModal from "../collections/AddToCollectionModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavs, removeFromFavs } from "../../store/slices/favoritesSlice";
+import { type VRScan } from "../../utils/types";
 import { RootState } from "../../store/store";
 
 export type ProductCardProps = {
   name: string;
+  item: VRScan;
   thumb: string;
   fileName: string;
   material: string;
@@ -17,6 +20,7 @@ export type ProductCardProps = {
 
 export default function ProductCard({
   name,
+  item,
   thumb,
   fileName,
   material,
@@ -29,6 +33,23 @@ export default function ProductCard({
   const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
 
   const user = useSelector((state: RootState) => state.userState.user);
+
+  const dispatch = useDispatch();
+
+  const favoritesList = useSelector((state: RootState) => state.favItems);
+
+  const isFavorite = (itemId: number): boolean => {
+    return favoritesList.some((favItem: VRScan) => favItem.id === itemId);
+  };
+
+  const handleToggleFavorite = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (isFavorite(item.id)) {
+      dispatch(removeFromFavs(item.id));
+    } else {
+      dispatch(addToFavs(item));
+    }
+  };
 
   const handleProductModalClose = () => {
     setProductModalOpen(false);
@@ -56,8 +77,11 @@ export default function ProductCard({
             >
               +
             </button>
-            <button className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
-              ♡
+            <button
+              className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
+              onClick={handleToggleFavorite}
+            >
+              {isFavorite(item.id) ? "♥" : "♡"}
             </button>
           </>
         )}
@@ -83,8 +107,9 @@ export default function ProductCard({
       {isProductModalOpen && !isCollectionModalOpen && (
         <ProductModal
           onClose={handleProductModalClose}
-          isFavorite={false}
+          isFavorite={isFavorite(item.id)}
           thumb={thumb}
+          item={item}
           name={name}
           material={material}
           manufacturer={manufacturer}
