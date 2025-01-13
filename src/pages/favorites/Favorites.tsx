@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Button } from "../../components";
-import { FavoriteProductCard, ProductsFilters } from "../../features";
-import GenericPage from "../genericPage/GenericPage";
+import { ProductCard, ProductsFilters } from "../../features";
+import GenericPage from "../../components/genericPage/GenericPage";
 import { useSelector } from "react-redux";
 import { useFetchColorsQuery } from "../../store/apis/colorsApi";
 import { useFetchIndustriesQuery } from "../../store/apis/industriesApi";
@@ -39,7 +38,7 @@ export default function Favorites() {
     >
       {favProducts.length &&
         favProducts.map((product) => (
-          <FavoriteProductCard
+          <ProductCard
             key={product.id}
             item={product}
             name={product.name}

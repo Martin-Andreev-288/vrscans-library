@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDataContext } from "../../context/DataContext";
 import { ProductCard, ProductsFilters } from "../../features";
-import GenericPage from "../genericPage/GenericPage";
+import GenericPage from "../../components/genericPage/GenericPage";
 import { useFetchColorsQuery } from "../../store/apis/colorsApi";
 import { useFetchIndustriesQuery } from "../../store/apis/industriesApi";
 import { useFetchManufacturersQuery } from "../../store/apis/manufacturersApi";

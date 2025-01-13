@@ -1,5 +1,5 @@
 import { CollectionsCard, CollectionsSidebar } from "../../features";
-import GenericPage from "../genericPage/GenericPage";
+import GenericPage from "../../components/genericPage/GenericPage";
 import { useDataContext } from "../../context/DataContext";
 
 export default function Collections() {

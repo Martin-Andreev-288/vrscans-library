@@ -1,4 +1,4 @@
-import { Loader } from "../../components";
+import { Loader } from "..";
 
 type GenericPageProps = {
   SidebarComponent: React.FC;

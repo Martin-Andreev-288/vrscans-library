@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ProductModal from "./ProductModal";
-import AddToCollectionModal from "../collections/AddToCollectionModal";
+import ProductModal from "../../features/products/ProductModal";
+import AddToCollectionModal from "../../features/collections/AddToCollectionModal";
 import { useDispatch, useSelector } from "react-redux";
 import { addToFavs, removeFromFavs } from "../../store/slices/favoritesSlice";
 import { type VRScan } from "../../utils/types";

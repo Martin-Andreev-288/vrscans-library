@@ -1,5 +1,5 @@
 import { FaTimes } from "react-icons/fa";
-import { type ProductCardProps } from "./ProductCard";
+import { type ProductCardProps } from "../../components/ProductCard/ProductCard";
 import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
