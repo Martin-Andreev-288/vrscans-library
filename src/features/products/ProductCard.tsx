@@ -108,6 +108,8 @@ export default function ProductCard({
         <ProductModal
           onClose={handleProductModalClose}
           isFavorite={isFavorite(item.id)}
+          handleToggleFavorite={handleToggleFavorite}
+          handleOpenCollectionModal={() => setIsCollectionModalOpen(true)}
           thumb={thumb}
           item={item}
           name={name}

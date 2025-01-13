@@ -108,6 +108,8 @@ export default function FavoriteProductCard({
         <ProductModal
           onClose={handleProductModalClose}
           isFavorite={isFavorite(item.id)}
+          handleToggleFavorite={handleToggleFavorite} // Pass the toggle function
+          handleOpenCollectionModal={() => setIsCollectionModalOpen(true)}
           thumb={thumb}
           item={item}
           name={name}

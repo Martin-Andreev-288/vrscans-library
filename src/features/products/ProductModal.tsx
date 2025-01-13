@@ -7,11 +7,15 @@ import { RootState } from "../../store/store";
 type ProductModalProps = {
   onClose: () => void;
   isFavorite: boolean;
+  handleToggleFavorite: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handleOpenCollectionModal: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export default function ProductModal({
   onClose,
   isFavorite,
+  handleToggleFavorite,
+  handleOpenCollectionModal,
   ...props
 }: ProductModalProps & ProductCardProps) {
   const { name, thumb, fileName, material, manufacturer, colors, tags, industries } = props;
@@ -32,10 +36,16 @@ export default function ProductModal({
           {/* Buttons */}
           {user && (
             <>
-              <button className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
+              <button
+                className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
+                onClick={handleOpenCollectionModal}
+              >
                 +
               </button>
-              <button className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300">
+              <button
+                className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
+                onClick={handleToggleFavorite}
+              >
                 {isFavorite ? "♥" : "♡"}
               </button>
             </>
