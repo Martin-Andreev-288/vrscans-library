@@ -3,23 +3,15 @@ import { Button } from "../../components";
 import { ProductCard, ProductsFilters } from "../../features";
 import GenericPage from "../../components/genericPage/GenericPage";
 import { useSelector } from "react-redux";
-import { useFetchColorsQuery } from "../../store/apis/colorsApi";
-import { useFetchIndustriesQuery } from "../../store/apis/industriesApi";
-import { useFetchManufacturersQuery } from "../../store/apis/manufacturersApi";
-import { useFetchMaterialsQuery } from "../../store/apis/materialsApi";
-import { useFetchTagsQuery } from "../../store/apis/tagsApi";
 import { RootState } from "../../store/store";
 import useLoading from "../../hooks/useLoading";
+import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
 
 export default function Favorites() {
   const isLoading = useLoading();
   const favProducts = useSelector((state: RootState) => state.favItems);
 
-  const { data: colors = [] } = useFetchColorsQuery();
-  const { data: industries = [] } = useFetchIndustriesQuery();
-  const { data: manufacturers = [] } = useFetchManufacturersQuery();
-  const { data: materials = [] } = useFetchMaterialsQuery();
-  const { data: tags = [] } = useFetchTagsQuery();
+  const { colors, industries, manufacturers, materials, tags } = useFetchFiltersData();
 
   const emptyPageText =
     "Your favorites list is empty! ☹️ Start exploring and save your top scans now!";
