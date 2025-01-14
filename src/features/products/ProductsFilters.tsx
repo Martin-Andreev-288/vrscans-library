@@ -1,13 +1,9 @@
 import { useState } from "react";
 import { FilterSection } from "../../components";
-import { useFetchColorsQuery } from "../../store/apis/colorsApi";
-import { useFetchMaterialsQuery } from "../../store/apis/materialsApi";
-import { useFetchTagsQuery } from "../../store/apis/tagsApi";
+import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
 
 export default function ProductsFilters() {
-  const { data: colors = [] } = useFetchColorsQuery();
-  const { data: materials = [] } = useFetchMaterialsQuery();
-  const { data: tags = [] } = useFetchTagsQuery();
+  const { colors, materials, tags } = useFetchFiltersData();
   const [expandedFilter, setExpandedFilter] = useState<string | null>(null);
 
   // Extract options for each filter
