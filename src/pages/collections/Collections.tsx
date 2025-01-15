@@ -1,10 +1,11 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 import { CollectionCard, CollectionsSidebar } from "../../features";
 import GenericPage from "../../components/genericPage/GenericPage";
-import { useDataContext } from "../../context/DataContext";
 
 export default function Collections() {
-  const { isLoading } = useDataContext();
-  const collections = Array(12).fill(null);
+  const collections = useSelector((state: RootState) => state.collections);
+
   const emptyPageText = "No collections found. Add your first collection to get started.";
 
   return (
@@ -12,11 +13,12 @@ export default function Collections() {
       SidebarComponent={CollectionsSidebar}
       title="Collections"
       emptyPageText={emptyPageText}
-      isLoading={isLoading}
+      isLoading={false}
     >
-      {collections.map((collection) => (
-        <CollectionCard />
-      ))}
+      {collections.length &&
+        collections.map((collection) => (
+          <CollectionCard key={collection.title} collection={collection} />
+        ))}
     </GenericPage>
   );
 }

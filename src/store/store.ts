@@ -3,6 +3,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { colorsApi, industriesApi, manufacturersApi, materialsApi, tagsApi } from "./apis";
 import userReducer from "./slices/userSlice";
 import favsReducer from "./slices/favoritesSlice";
+import collectionsReducer from "./slices/collectionsSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,7 +13,8 @@ const store = configureStore({
     [materialsApi.reducerPath]: materialsApi.reducer,
     [tagsApi.reducerPath]: tagsApi.reducer,
     userState: userReducer,
-    favItems: favsReducer
+    favItems: favsReducer,
+    collections: collectionsReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

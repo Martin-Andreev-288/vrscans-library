@@ -58,3 +58,8 @@ export type DataContextType = {
   isLoading: boolean;
   error: string | null;
 };
+
+export type CollectionState = {
+  title: string;
+  items: VRScan[];
+};
