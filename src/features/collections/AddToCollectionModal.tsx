@@ -1,16 +1,22 @@
 import { FaTimes } from "react-icons/fa";
 import fontModalImage from "/src/assets/addCollectionImg.png";
 import { ModalWrapper } from "../../components";
+import useClickOutside from "../../hooks/useClickOutside";
 
 type AddToCollectionModalProps = {
   onClose: () => void;
 };
 
 export default function AddToCollectionModal({ onClose }: AddToCollectionModalProps) {
+  const modalRef = useClickOutside(onClose);
+
   return (
     <ModalWrapper>
       {/* Modal Window */}
-      <div className="relative bg-white max-h-192 2xl:h-1/2 w-[90%] max-w-md p-6 rounded-lg shadow-lg flex flex-col">
+      <div
+        ref={modalRef}
+        className="relative bg-white max-h-192 2xl:h-1/2 w-[90%] max-w-md p-6 rounded-lg shadow-lg flex flex-col"
+      >
         {/* Font Image */}
         <img
           src={fontModalImage}

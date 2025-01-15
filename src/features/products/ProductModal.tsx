@@ -3,6 +3,7 @@ import { type ProductCardProps } from "./ProductCard";
 import { ModalWrapper } from "../../components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import useClickOutside from "../../hooks/useClickOutside";
 
 type ProductModalProps = {
   onClose: () => void;
@@ -21,11 +22,12 @@ export default function ProductModal({
   const { name, thumb, fileName, material, manufacturer, colors, tags, industries } = props;
 
   const user = useSelector((state: RootState) => state.userState.user);
+  const modalRef = useClickOutside(onClose);
 
   return (
     <ModalWrapper>
       {/* Modal Card */}
-      <div className="bg-white rounded-lg shadow-lg w-[90%] max-w-4xl p-4 flex">
+      <div ref={modalRef} className="bg-white rounded-lg shadow-lg w-[90%] max-w-4xl p-4 flex">
         {/* Left Section - Image */}
         <div className="relative w-1/2 flex items-end justify-center">
           <img
