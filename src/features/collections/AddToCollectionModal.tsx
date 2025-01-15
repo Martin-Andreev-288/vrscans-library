@@ -1,14 +1,14 @@
 import { FaTimes } from "react-icons/fa";
 import fontModalImage from "/src/assets/addCollectionImg.png";
-import { createPortal } from "react-dom";
+import { ModalWrapper } from "../../components";
 
 type AddToCollectionModalProps = {
   onClose: () => void;
 };
 
 export default function AddToCollectionModal({ onClose }: AddToCollectionModalProps) {
-  const modalContent = (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
+  return (
+    <ModalWrapper>
       {/* Modal Window */}
       <div className="relative bg-white max-h-192 2xl:h-1/2 w-[90%] max-w-md p-6 rounded-lg shadow-lg flex flex-col">
         {/* Font Image */}
@@ -95,8 +95,7 @@ export default function AddToCollectionModal({ onClose }: AddToCollectionModalPr
           </button>
         </div>
       </div>
-    </div>
+      ;
+    </ModalWrapper>
   );
-
-  return createPortal(modalContent, document.getElementById("modal-root")!);
 }

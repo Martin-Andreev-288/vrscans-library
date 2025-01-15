@@ -1,6 +1,6 @@
 import { FaTimes } from "react-icons/fa";
 import { type ProductCardProps } from "./ProductCard";
-import { createPortal } from "react-dom";
+import { ModalWrapper } from "../../components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
@@ -22,8 +22,8 @@ export default function ProductModal({
 
   const user = useSelector((state: RootState) => state.userState.user);
 
-  const modalContent = (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+  return (
+    <ModalWrapper>
       {/* Modal Card */}
       <div className="bg-white rounded-lg shadow-lg w-[90%] max-w-4xl p-4 flex">
         {/* Left Section - Image */}
@@ -86,8 +86,6 @@ export default function ProductModal({
           </div>
         </div>
       </div>
-    </div>
+    </ModalWrapper>
   );
-
-  return createPortal(modalContent, document.getElementById("modal-root")!);
 }
