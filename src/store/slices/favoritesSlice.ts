@@ -13,10 +13,7 @@ const favsSlice = createSlice({
   reducers: {
     addToFavs: (state, action: PayloadAction<VRScan>) => {
       const favItem = action.payload;
-      const isAlreadyInFavs = state.find((item: VRScan) => item.id === favItem.id);
-      if (!isAlreadyInFavs) {
-        state.push(favItem);
-      }
+      state.push(favItem);
 
       localStorage.setItem("favItems", JSON.stringify(state));
       toast.success("VRScan added to favorites", { autoClose: 2000 });
