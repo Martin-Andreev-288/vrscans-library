@@ -2,7 +2,7 @@ import collectionImage from "/src/assets/imgCollection.png";
 import { Button } from "../../components";
 import { FiTrash } from "react-icons/fi";
 
-export default function CollectionsCard() {
+export default function CollectionCard() {
   return (
     <>
       <li className="relative flex flex-col h-[300px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200">

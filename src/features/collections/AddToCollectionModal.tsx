@@ -2,6 +2,7 @@ import { FaTimes } from "react-icons/fa";
 import fontModalImage from "/src/assets/addCollectionImg.png";
 import { ModalWrapper } from "../../components";
 import useClickOutside from "../../hooks/useClickOutside";
+import { CiSearch } from "react-icons/ci";
 
 type AddToCollectionModalProps = {
   onClose: () => void;
@@ -42,20 +43,7 @@ export default function AddToCollectionModal({ onClose }: AddToCollectionModalPr
             placeholder="Search collections..."
             className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-5 h-5 absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-400"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
+          <CiSearch className="w-5 h-5 absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-400" />
         </div>
 
         {/* List of Collections */}

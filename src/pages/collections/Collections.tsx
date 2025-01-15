@@ -1,4 +1,4 @@
-import { CollectionsCard, CollectionsSidebar } from "../../features";
+import { CollectionCard, CollectionsSidebar } from "../../features";
 import GenericPage from "../../components/genericPage/GenericPage";
 import { useDataContext } from "../../context/DataContext";
 
@@ -15,7 +15,7 @@ export default function Collections() {
       isLoading={isLoading}
     >
       {collections.map((collection) => (
-        <CollectionsCard />
+        <CollectionCard />
       ))}
     </GenericPage>
   );
