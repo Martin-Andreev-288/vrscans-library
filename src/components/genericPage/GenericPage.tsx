@@ -3,7 +3,7 @@ import { Loader } from "..";
 type GenericPageProps = {
   SidebarComponent: React.FC;
   title: string;
-  emptyPageText: string;
+  emptyPageText?: string;
   navButton?: React.ReactNode;
   isLoading?: boolean;
   children?: React.ReactNode;
