@@ -121,7 +121,9 @@ export default function ProductCard({
           industries={industries}
         />
       )}
-      {isCollectionModalOpen && <AddToCollectionModal onClose={handleCollectionModalClose} />}
+      {isCollectionModalOpen && (
+        <AddToCollectionModal onClose={handleCollectionModalClose} item={item} />
+      )}
     </>
   );
 }

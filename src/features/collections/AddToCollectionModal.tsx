@@ -3,13 +3,27 @@ import fontModalImage from "/src/assets/addCollectionImg.png";
 import { ModalWrapper } from "../../components";
 import useClickOutside from "../../hooks/useClickOutside";
 import { CiSearch } from "react-icons/ci";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { useDispatch } from "react-redux";
+import { addItemToCollection } from "../../store/slices/collectionsSlice";
+import { VRScan } from "../../utils/types";
 
 type AddToCollectionModalProps = {
   onClose: () => void;
+  item: VRScan;
 };
 
-export default function AddToCollectionModal({ onClose }: AddToCollectionModalProps) {
+export default function AddToCollectionModal({ onClose, item }: AddToCollectionModalProps) {
+  const collections = useSelector((state: RootState) => state.collections);
+  const dispatch = useDispatch();
+
   const modalRef = useClickOutside(onClose);
+
+  const isInTheCollection = (collectionTitle: string): boolean | undefined => {
+    const collection = collections.find((col) => col.title === collectionTitle);
+    return collection?.items.some((existingItem) => existingItem.id === item.id);
+  };
 
   return (
     <ModalWrapper>
@@ -48,30 +62,25 @@ export default function AddToCollectionModal({ onClose }: AddToCollectionModalPr
 
         {/* List of Collections */}
         <ul className="space-y-4 max-h-44 overflow-scroll">
-          <li className="flex justify-between items-center">
-            <span className="text-gray-800">Concert Hall</span>
-            <button className="px-4 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-              Save
-            </button>
-          </li>
-          <li className="flex justify-between items-center">
-            <span className="text-gray-800">Wood</span>
-            <button className="px-4 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-              Save
-            </button>
-          </li>
-          <li className="flex justify-between items-center">
-            <span className="text-gray-800">Metal</span>
-            <button className="px-4 py-1 bg-gray-300 text-gray-500 rounded-md cursor-not-allowed">
-              Saved
-            </button>
-          </li>
-          <li className="flex justify-between items-center">
-            <span className="text-gray-800">Library</span>
-            <button className="px-4 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-              Save
-            </button>
-          </li>
+          {collections.map((collection) => (
+            <li className="flex justify-between items-center">
+              <span className="text-gray-800">{collection.title}</span>
+              {!isInTheCollection(collection.title) ? (
+                <button
+                  className="px-4 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                  onClick={() => {
+                    dispatch(addItemToCollection({ collectionTitle: collection.title, item }));
+                  }}
+                >
+                  Save
+                </button>
+              ) : (
+                <button className="px-4 py-1 bg-gray-300 text-gray-500 rounded-md cursor-not-allowed">
+                  Saved
+                </button>
+              )}
+            </li>
+          ))}
         </ul>
 
         {/* Create Collection Button */}

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CollectionState } from "../../utils/types";
+import { CollectionState, VRScan } from "../../utils/types";
 import { toast } from "react-toastify";
 
 const getCollectionsFromLocalStorage = (): CollectionState[] => {
@@ -16,10 +16,12 @@ const collectionsSlice = createSlice({
   initialState: getCollectionsFromLocalStorage(),
   reducers: {
     addCollection: (state, action: PayloadAction<string>) => {
+      const title = action.payload;
       const newCollection: CollectionState = {
-        title: action.payload,
+        title,
         items: []
       };
+
       state.push(newCollection);
       saveCollectionsToLocalStorage(state);
       toast.success("Collection created", { autoClose: 2000 });
@@ -29,10 +31,22 @@ const collectionsSlice = createSlice({
       saveCollectionsToLocalStorage(updatedState);
       toast.success("Collection removed", { autoClose: 2000 });
       return updatedState;
+    },
+    addItemToCollection: (
+      state,
+      action: PayloadAction<{ collectionTitle: string; item: VRScan }>
+    ) => {
+      const { collectionTitle, item } = action.payload;
+      const collection = state.find((col) => col.title === collectionTitle);
+      if (collection && !collection.items.find((existingItem) => existingItem.id === item.id)) {
+        collection.items.push(item);
+        saveCollectionsToLocalStorage(state);
+      }
+      toast.success(`Item added in collection "${collectionTitle}"`, { autoClose: 2000 });
     }
   }
 });
 
-export const { addCollection, removeCollection } = collectionsSlice.actions;
+export const { addCollection, removeCollection, addItemToCollection } = collectionsSlice.actions;
 
 export default collectionsSlice.reducer;
