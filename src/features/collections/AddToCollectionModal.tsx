@@ -3,16 +3,12 @@ import fontModalImage from "/src/assets/addCollectionImg.png";
 import { ModalWrapper } from "../../components";
 import useClickOutside from "../../hooks/useClickOutside";
 import { CiSearch } from "react-icons/ci";
-import { useDispatch } from "react-redux";
-import { addItemToCollection } from "../../store/slices/collectionsSlice";
 
 type AddToCollectionModalProps = {
   onClose: () => void;
 };
 
 export default function AddToCollectionModal({ onClose }: AddToCollectionModalProps) {
-  const dispatch = useDispatch();
-
   const modalRef = useClickOutside(onClose);
 
   return (

@@ -7,11 +7,11 @@ import useClickOutside from "../../hooks/useClickOutside";
 import { addCollection } from "../../store/slices/collectionsSlice";
 import { toast } from "react-toastify";
 
-type AddToCollectionModalProps = {
+type CreateCollectionModalProps = {
   onClose: () => void;
 };
 
-export default function CreateCollectionModal({ onClose }: AddToCollectionModalProps) {
+export default function CreateCollectionModal({ onClose }: CreateCollectionModalProps) {
   const modalRef = useClickOutside(onClose);
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
