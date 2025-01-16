@@ -3,12 +3,16 @@ import fontModalImage from "/src/assets/addCollectionImg.png";
 import { ModalWrapper } from "../../components";
 import useClickOutside from "../../hooks/useClickOutside";
 import { CiSearch } from "react-icons/ci";
+import { useDispatch } from "react-redux";
+import { addItemToCollection } from "../../store/slices/collectionsSlice";
 
 type AddToCollectionModalProps = {
   onClose: () => void;
 };
 
 export default function AddToCollectionModal({ onClose }: AddToCollectionModalProps) {
+  const dispatch = useDispatch();
+
   const modalRef = useClickOutside(onClose);
 
   return (
@@ -47,7 +51,7 @@ export default function AddToCollectionModal({ onClose }: AddToCollectionModalPr
         </div>
 
         {/* List of Collections */}
-        <ul className="space-y-4">
+        <ul className="space-y-4 max-h-44 overflow-scroll">
           <li className="flex justify-between items-center">
             <span className="text-gray-800">Concert Hall</span>
             <button className="px-4 py-1 bg-blue-600 text-white rounded-md hover:bg-blue-700">
