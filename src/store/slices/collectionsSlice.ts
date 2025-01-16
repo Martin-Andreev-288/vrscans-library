@@ -43,10 +43,23 @@ const collectionsSlice = createSlice({
         saveCollectionsToLocalStorage(state);
       }
       toast.success(`Item added in collection "${collectionTitle}"`, { autoClose: 2000 });
+    },
+    removeItemFromCollection: (
+      state,
+      action: PayloadAction<{ collectionTitle: string; itemId: number }>
+    ) => {
+      const { collectionTitle, itemId } = action.payload;
+      const collection = state.find((col) => col.title === collectionTitle);
+      if (collection) {
+        collection.items = collection.items.filter((item) => item.id !== itemId);
+        toast.success(`Item removed from collection "${collectionTitle}"`, { autoClose: 2000 });
+        saveCollectionsToLocalStorage(state);
+      }
     }
   }
 });
 
-export const { addCollection, removeCollection, addItemToCollection } = collectionsSlice.actions;
+export const { addCollection, removeCollection, addItemToCollection, removeItemFromCollection } =
+  collectionsSlice.actions;
 
 export default collectionsSlice.reducer;
