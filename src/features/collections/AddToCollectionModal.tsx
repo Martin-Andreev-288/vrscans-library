@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import fontModalImage from "/src/assets/addCollectionImg.png";
 import { ModalWrapper } from "../../components";
@@ -8,6 +9,8 @@ import { RootState } from "../../store/store";
 import { useDispatch } from "react-redux";
 import { addItemToCollection } from "../../store/slices/collectionsSlice";
 import { VRScan } from "../../utils/types";
+import { addCollection } from "../../store/slices/collectionsSlice";
+import { toast } from "react-toastify";
 
 type AddToCollectionModalProps = {
   onClose: () => void;
@@ -17,12 +20,24 @@ type AddToCollectionModalProps = {
 export default function AddToCollectionModal({ onClose, item }: AddToCollectionModalProps) {
   const collections = useSelector((state: RootState) => state.collections);
   const dispatch = useDispatch();
+  const [title, setTitle] = useState("");
+  const [collectionTitleField, setCollectionTitleField] = useState(false);
 
   const modalRef = useClickOutside(onClose);
 
   const isInTheCollection = (collectionTitle: string): boolean | undefined => {
     const collection = collections.find((col) => col.title === collectionTitle);
     return collection?.items.some((existingItem) => existingItem.id === item.id);
+  };
+
+  const handleCreateCollection = () => {
+    if (title.trim()) {
+      dispatch(addCollection(title));
+      setCollectionTitleField(false);
+      setTitle("");
+    } else {
+      toast.error("Collection title cannot be empty!", { autoClose: 2000 });
+    }
   };
 
   return (
@@ -85,17 +100,32 @@ export default function AddToCollectionModal({ onClose, item }: AddToCollectionM
 
         {/* Create Collection Button */}
         <div className="flex flex-col items-center">
-          <button className="mt-12 w-full px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-600 hover:text-white">
+          <button
+            className="mt-12 w-full px-4 py-2 text-blue-600 border border-blue-600 rounded-md hover:bg-blue-600 hover:text-white"
+            onClick={() => setCollectionTitleField((open) => !open)}
+          >
             Create a Collection
           </button>
 
-          {/* Done Button */}
-          <button
-            onClick={onClose}
-            className="mt-32 w-1/3 px-4 py-2 bg-green-600 text-black border border-black font-bold rounded-md hover:bg-green-700"
-          >
-            Done
-          </button>
+          {collectionTitleField && (
+            <>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Enter Collection Title Here and Press 'Done'"
+                className="w-full mt-4 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+
+              {/* Done Button */}
+              <button
+                onClick={handleCreateCollection}
+                className="mt-32 w-1/3 px-4 py-2 bg-green-600 text-black border border-black font-bold rounded-md hover:bg-green-700"
+              >
+                Done
+              </button>
+            </>
+          )}
         </div>
       </div>
       ;
