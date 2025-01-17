@@ -1,4 +1,3 @@
-import { useState } from "react";
 import collectionImage from "/src/assets/imgCollection.png";
 import { Button } from "../../components";
 import { FiTrash } from "react-icons/fi";
@@ -7,8 +6,12 @@ import { removeCollection, removeItemFromCollection } from "../../store/slices/c
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
-export default function CollectionCards() {
-  const [viewingItems, setViewingItems] = useState<string | null>(null);
+type CollectionCardsProps = {
+  viewingItems: string | null;
+  setViewingItems: React.Dispatch<React.SetStateAction<string | null>>;
+};
+
+export default function CollectionCards({ viewingItems, setViewingItems }: CollectionCardsProps) {
   const collections = useSelector((state: RootState) => state.collections);
   const dispatch = useDispatch();
 
