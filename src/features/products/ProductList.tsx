@@ -18,7 +18,7 @@ export default function ProductList() {
   return (
     <>
       {vrscans.length ? (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        <ul className="card-container">
           {vrscans.map((product) => (
             <ProductCard
               key={product.id}

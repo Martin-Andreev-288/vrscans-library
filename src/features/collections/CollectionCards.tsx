@@ -17,7 +17,7 @@ export default function CollectionCards() {
   const renderCollections = () => (
     <>
       {collections.length ? (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+        <ul className="card-container">
           {collections.map((collection) => (
             <li
               key={collection.title}
@@ -72,7 +72,7 @@ export default function CollectionCards() {
     return (
       <>
         {currentCollection.items.length ? (
-          <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+          <ul className="card-container">
             {currentCollection.items.map((item) => (
               <li
                 key={item.name}
