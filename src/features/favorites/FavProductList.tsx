@@ -1,25 +1,23 @@
-import { useEffect } from "react";
-import { useDataContext } from "../../context/DataContext";
-import ProductCard from "./ProductCard";
-import { type VRScan } from "../../utils/types";
+import ProductCard from "../products/ProductCard";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
+import { NavLink } from "react-router-dom";
+import { Button } from "../../components";
 
 export default function ProductList() {
-  const { vrscans, updateVrscans, isLoading } = useDataContext();
-
-  useEffect(() => {
-    updateVrscans();
-  }, []);
+  const favProducts = useSelector((state: RootState) => state.favItems);
 
   const { colors, industries, manufacturers, materials, tags } = useFetchFiltersData();
 
-  const emptyPageText = "No VRScans match your filter ❌ Please modify your search and try again";
+  const emptyPageText =
+    "Your favorites list is empty! ☹️ Start exploring and save your top scans now!";
 
   return (
     <>
-      {vrscans.length ? (
+      {favProducts.length ? (
         <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-          {vrscans.map((product) => (
+          {favProducts.map((product) => (
             <ProductCard
               key={product.id}
               item={product}
@@ -52,6 +50,11 @@ export default function ProductList() {
       ) : (
         <>
           <h1 className="text-xl font-bold mb-6 text-center">{emptyPageText}</h1>
+          <div className="mt-4 flex justify-center">
+            <NavLink to="/products">
+              <Button type="navButton">Begin Your VRS Journey</Button>
+            </NavLink>
+          </div>
         </>
       )}
     </>
