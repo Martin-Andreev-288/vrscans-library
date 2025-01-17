@@ -6,7 +6,7 @@ import { removeCollection, removeItemFromCollection } from "../../store/slices/c
 import { addToFavs, removeFromFavs } from "../../store/slices/favoritesSlice";
 import { type VRScan } from "../../utils/types";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { RootState, AppDispatch } from "../../store/store";
 
 type CollectionCardsProps = {
   viewingItems: string | null;
@@ -21,6 +21,35 @@ export default function CollectionCards({ viewingItems, setViewingItems }: Colle
 
   const isFavorite = (itemId: number): boolean => {
     return favoritesList.some((favItem: VRScan) => favItem.id === itemId);
+  };
+
+  const handleRemoveItem = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    dispatch: AppDispatch,
+    collectionTitle: string,
+    itemId: number
+  ) => {
+    e.stopPropagation();
+    dispatch(
+      removeItemFromCollection({
+        collectionTitle,
+        itemId
+      })
+    );
+  };
+
+  const handleToggleFavorite = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    dispatch: AppDispatch,
+    isFavorite: (itemId: number) => boolean,
+    item: VRScan
+  ) => {
+    event.stopPropagation();
+    if (isFavorite(item.id)) {
+      dispatch(removeFromFavs(item.id));
+    } else {
+      dispatch(addToFavs(item));
+    }
   };
 
   const emptyPageText = "No collections found. Add your first collection to get started.";
@@ -91,28 +120,13 @@ export default function CollectionCards({ viewingItems, setViewingItems }: Colle
                 {/* Buttons */}
                 <button
                   className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
-                  onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                    e.stopPropagation();
-                    dispatch(
-                      removeItemFromCollection({
-                        collectionTitle: currentCollection.title,
-                        itemId: item.id
-                      })
-                    );
-                  }}
+                  onClick={(e) => handleRemoveItem(e, dispatch, currentCollection.title, item.id)}
                 >
                   <FiTrash />
                 </button>
                 <button
                   className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
-                  onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
-                    event.stopPropagation();
-                    if (isFavorite(item.id)) {
-                      dispatch(removeFromFavs(item.id));
-                    } else {
-                      dispatch(addToFavs(item));
-                    }
-                  }}
+                  onClick={(e) => handleToggleFavorite(e, dispatch, isFavorite, item)}
                 >
                   {isFavorite(item.id) ? "♥" : "♡"}
                 </button>
