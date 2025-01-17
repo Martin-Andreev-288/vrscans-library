@@ -4,6 +4,7 @@ import { FiTrash } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { removeCollection, removeItemFromCollection } from "../../store/slices/collectionsSlice";
 import { addToFavs, removeFromFavs } from "../../store/slices/favoritesSlice";
+import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
 import { type VRScan } from "../../utils/types";
 import { useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../store/store";
@@ -15,6 +16,9 @@ type CollectionCardsProps = {
 
 export default function CollectionCards({ viewingItems, setViewingItems }: CollectionCardsProps) {
   const collections = useSelector((state: RootState) => state.collections);
+
+  const { manufacturers, materials } = useFetchFiltersData();
+
   const dispatch = useDispatch();
 
   const favoritesList = useSelector((state: RootState) => state.favItems);
@@ -61,7 +65,7 @@ export default function CollectionCards({ viewingItems, setViewingItems }: Colle
           {collections.map((collection) => (
             <li
               key={collection.title}
-              className="relative flex flex-col h-[300px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
+              className="relative flex flex-col h-[320px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
             >
               {/* Buttons */}
               <button
@@ -115,7 +119,7 @@ export default function CollectionCards({ viewingItems, setViewingItems }: Colle
             {currentCollection.items.map((item) => (
               <li
                 key={item.name}
-                className="relative flex flex-col h-[300px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
+                className="relative flex flex-col h-[320px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
               >
                 {/* Buttons */}
                 <button
@@ -142,8 +146,15 @@ export default function CollectionCards({ viewingItems, setViewingItems }: Colle
                 <div className="text-center">
                   <h3 className="text-lg text-center font-semibold mb-2">{item.name}</h3>
                   <ul className="text-left text-sm">
-                    <li className="pl-2">Material</li>
-                    <li className="pl-2">Manufacturer</li>
+                    <li className="pl-2">
+                      {materials.find((m) => m.id === item.materialTypeId)?.name ||
+                        "Unknown Material"}
+                    </li>
+                    <li className="pl-2">
+                      Manufacturer:{" "}
+                      {manufacturers.find((m) => m.id === item.manufacturerId)?.name ||
+                        "Unknown Manufacturer"}
+                    </li>
                   </ul>
                 </div>
               </li>
