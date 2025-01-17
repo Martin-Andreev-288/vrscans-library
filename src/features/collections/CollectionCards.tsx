@@ -122,5 +122,14 @@ export default function CollectionCards() {
     );
   };
 
-  return <>{viewingItems ? renderCollectionItems() : renderCollections()}</>;
+  return (
+    <>
+      {viewingItems ? renderCollectionItems() : renderCollections()}
+      <div className="mt-6 flex justify-center">
+        <Button type="viewItemsButton" onClick={() => setViewingItems(null)}>
+          Back to Collections
+        </Button>
+      </div>
+    </>
+  );
 }
