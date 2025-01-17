@@ -64,14 +64,13 @@ export default function CollectionCards() {
       return (
         <div className="text-center text-gray-500">
           <p>Collection not found.</p>
-          <button onClick={() => setViewingItems(null)}>Back to Collections</button>
         </div>
       );
     }
 
     return (
       <>
-        {currentCollection.items.length ? (
+        {currentCollection?.items.length ? (
           <ul className="card-container">
             {currentCollection.items.map((item) => (
               <li
@@ -118,18 +117,14 @@ export default function CollectionCards() {
         ) : (
           <p className="text-center text-gray-500">No items in this collection.</p>
         )}
+        <div className="mt-6 flex justify-center">
+          <Button type="viewItemsButton" onClick={() => setViewingItems(null)}>
+            Back to Collections
+          </Button>
+        </div>
       </>
     );
   };
 
-  return (
-    <>
-      {viewingItems ? renderCollectionItems() : renderCollections()}
-      <div className="mt-6 flex justify-center">
-        <Button type="viewItemsButton" onClick={() => setViewingItems(null)}>
-          Back to Collections
-        </Button>
-      </div>
-    </>
-  );
+  return <>{viewingItems ? renderCollectionItems() : renderCollections()}</>;
 }
