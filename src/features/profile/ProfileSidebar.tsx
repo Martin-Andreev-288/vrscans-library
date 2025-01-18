@@ -1,4 +1,3 @@
-import Button from "../../components/button/Button";
 import productImage from "/src/assets/profileImg.png";
 import { FaEdit } from "react-icons/fa";
 
@@ -22,7 +21,6 @@ export default function ProfileSidebar() {
         <h2 className="mt-2 text-gray-600">React Developer</h2>
         <h2 className="text-gray-600">seamann@gmail.com</h2>
       </div>
-      <Button type="editProfileButton">Edit Profile</Button>
     </div>
   );
 }
