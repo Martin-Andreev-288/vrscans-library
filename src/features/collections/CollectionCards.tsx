@@ -1,13 +1,12 @@
 import collectionImage from "/src/assets/imgCollection.png";
 import { Button } from "../../components";
+import CollectionProductCard from "./CollectionProductCard";
 import { FiTrash } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import { removeCollection, removeItemFromCollection } from "../../store/slices/collectionsSlice";
-import { addToFavs, removeFromFavs } from "../../store/slices/favoritesSlice";
+import { removeCollection } from "../../store/slices/collectionsSlice";
 import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
-import { type VRScan } from "../../utils/types";
 import { useSelector } from "react-redux";
-import { RootState, AppDispatch } from "../../store/store";
+import { RootState } from "../../store/store";
 
 type CollectionCardsProps = {
   viewingItems: string | null;
@@ -17,44 +16,9 @@ type CollectionCardsProps = {
 export default function CollectionCards({ viewingItems, setViewingItems }: CollectionCardsProps) {
   const collections = useSelector((state: RootState) => state.collections);
 
-  const { manufacturers, materials } = useFetchFiltersData();
+  const { colors, industries, manufacturers, materials, tags } = useFetchFiltersData();
 
   const dispatch = useDispatch();
-
-  const favoritesList = useSelector((state: RootState) => state.favItems);
-
-  const isFavorite = (itemId: number): boolean => {
-    return favoritesList.some((favItem: VRScan) => favItem.id === itemId);
-  };
-
-  const handleRemoveItem = (
-    e: React.MouseEvent<HTMLButtonElement>,
-    dispatch: AppDispatch,
-    collectionTitle: string,
-    itemId: number
-  ) => {
-    e.stopPropagation();
-    dispatch(
-      removeItemFromCollection({
-        collectionTitle,
-        itemId
-      })
-    );
-  };
-
-  const handleToggleFavorite = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    dispatch: AppDispatch,
-    isFavorite: (itemId: number) => boolean,
-    item: VRScan
-  ) => {
-    event.stopPropagation();
-    if (isFavorite(item.id)) {
-      dispatch(removeFromFavs(item.id));
-    } else {
-      dispatch(addToFavs(item));
-    }
-  };
 
   const emptyPageText = "No collections found. Add your first collection to get started.";
 
@@ -117,47 +81,34 @@ export default function CollectionCards({ viewingItems, setViewingItems }: Colle
         {currentCollection?.items.length ? (
           <ul className="card-container">
             {currentCollection.items.map((item) => (
-              <li
-                key={item.name}
-                className="relative flex flex-col h-[320px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
-              >
-                {/* Buttons */}
-                <button
-                  className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
-                  onClick={(e) => handleRemoveItem(e, dispatch, currentCollection.title, item.id)}
-                >
-                  <FiTrash />
-                </button>
-                <button
-                  className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
-                  onClick={(e) => handleToggleFavorite(e, dispatch, isFavorite, item)}
-                >
-                  {isFavorite(item.id) ? "♥" : "♡"}
-                </button>
-
-                {/* Image */}
-                <img
-                  src={item.thumb}
-                  alt="image not found"
-                  className="w-full h-40 object-fill rounded-md mb-4"
-                />
-
-                {/* Title */}
-                <div className="text-center">
-                  <h3 className="text-lg text-center font-semibold mb-2">{item.name}</h3>
-                  <ul className="text-left text-sm">
-                    <li className="pl-2">
-                      {materials.find((m) => m.id === item.materialTypeId)?.name ||
-                        "Unknown Material"}
-                    </li>
-                    <li className="pl-2">
-                      Manufacturer:{" "}
-                      {manufacturers.find((m) => m.id === item.manufacturerId)?.name ||
-                        "Unknown Manufacturer"}
-                    </li>
-                  </ul>
-                </div>
-              </li>
+              <CollectionProductCard
+                key={item.id}
+                item={item}
+                name={item.name}
+                thumb={item.thumb}
+                fileName={item.fileName}
+                material={
+                  materials.find((m) => m.id === item.materialTypeId)?.name || "Unknown Material"
+                }
+                manufacturer={
+                  manufacturers.find((m) => m.id === item.manufacturerId)?.name ||
+                  "Unknown Manufacturer"
+                }
+                industries={
+                  item.industries
+                    .map((id) => industries.find((ind) => ind.id === id)?.name)
+                    .join(", ") || "Unknown Industries"
+                }
+                colors={
+                  item.colors.map((id) => colors.find((col) => col.id === id)?.name).join(", ") ||
+                  "Unknown Colors"
+                }
+                tags={
+                  item.tags.map((id) => tags.find((tag) => tag.id === id)?.name).join(", ") ||
+                  "Unknown Tags"
+                }
+                collectionTitle={currentCollection.title}
+              />
             ))}
           </ul>
         ) : (
