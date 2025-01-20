@@ -1,5 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { apiClient } from "../../utils/apiClient";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type User = {
   username: string;
@@ -25,18 +24,6 @@ const initialState: UserState = {
   error: null
 };
 
-export const fetchUser = createAsyncThunk<User, number, { rejectValue: string }>(
-  "user/fetchUser",
-  async (id, { rejectWithValue }) => {
-    try {
-      const response = await apiClient.get(`/users/${id}`);
-      return response.data;
-    } catch (err: any) {
-      return rejectWithValue("Failed to fetch user");
-    }
-  }
-);
-
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -55,20 +42,6 @@ const userSlice = createSlice({
         sessionStorage.setItem("user", JSON.stringify(state.user));
       }
     }
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchUser.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(fetchUser.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.user = action.payload;
-      })
-      .addCase(fetchUser.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload || "Error occurred";
-      });
   }
 });
 

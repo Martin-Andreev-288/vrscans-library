@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { apiClient } from "../utils/apiClient";
 import { type VRScan } from "../utils/types";
 

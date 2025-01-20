@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import { useDataContext } from "../../context/DataContext";
 import ProductCard from "./ProductCard";
-import { type VRScan } from "../../utils/types";
 import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
 
 export default function ProductList() {
-  const { vrscans, updateVrscans, isLoading } = useDataContext();
+  const { vrscans, updateVrscans } = useDataContext();
 
   useEffect(() => {
     updateVrscans();

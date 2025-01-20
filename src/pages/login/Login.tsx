@@ -13,7 +13,7 @@ export const action =
   (store: ReduxStore): ActionFunction =>
   async ({ request }): Promise<Response | null> => {
     const formData = await request.formData();
-    // const data = Object.fromEntries(formData);
+
     const data = {
       email: formData.get("email"),
       password: formData.get("password")
