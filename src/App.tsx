@@ -15,6 +15,7 @@ import { DataProvider } from "./context/DataContext";
 
 import { action as registerAction } from "./pages/signUp/SignUp";
 import { action as loginAction } from "./pages/login/Login";
+import { action as profileAction } from "./pages/profile/Profile";
 
 import store from "./store/store";
 
@@ -54,7 +55,8 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
-        errorElement: <ErrorElement />
+        errorElement: <ErrorElement />,
+        action: profileAction(store)
       },
       {
         path: "collections",

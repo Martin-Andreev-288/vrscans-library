@@ -3,6 +3,8 @@ import { apiClient } from "../../utils/apiClient";
 
 export type User = {
   username: string;
+  email: string;
+  id: number;
   jwt: string;
 };
 
@@ -12,7 +14,7 @@ type UserState = {
   error: string | null;
 };
 
-const getUserFromStorage = (): User | null => {
+export const getUserFromStorage = (): User | null => {
   const user = sessionStorage.getItem("user");
   return user ? JSON.parse(user) : null;
 };
@@ -46,6 +48,12 @@ const userSlice = createSlice({
     logoutUser: (state) => {
       state.user = null;
       sessionStorage.removeItem("user");
+    },
+    editProfile: (state, action: PayloadAction<Partial<User>>) => {
+      if (state.user) {
+        state.user = { ...state.user, ...action.payload };
+        sessionStorage.setItem("user", JSON.stringify(state.user));
+      }
     }
   },
   extraReducers: (builder) => {
@@ -64,6 +72,6 @@ const userSlice = createSlice({
   }
 });
 
-export const { loginUser, logoutUser } = userSlice.actions;
+export const { loginUser, logoutUser, editProfile } = userSlice.actions;
 
 export default userSlice.reducer;

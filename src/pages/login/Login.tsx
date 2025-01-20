@@ -22,10 +22,14 @@ export const action =
     try {
       const response: AxiosResponse = await apiClient.post("/login", data);
       const username = response.data.user.username;
+      const email = response.data.user.email;
+      const id = response.data.user.id;
       const jwt = response.data.jwt;
       store.dispatch(
         loginUser({
           username,
+          email,
+          id,
           jwt
         })
       );
