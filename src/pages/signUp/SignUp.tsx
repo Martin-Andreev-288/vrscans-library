@@ -39,7 +39,9 @@ export default function SignUp() {
   return (
     <div className="min-h-screen flex flex-col justify-start items-center">
       <div className="flex flex-col items-left justify-center border-b-4 border-b-black h-[8vh] w-[90vw]">
-        <img className="w-[25rem]" src={logo} alt="Chaosgroup Logo" />
+        <Link to="/">
+          <img className="w-[25rem]" src={logo} alt="Chaosgroup Logo" />
+        </Link>
       </div>
       <div className="flex flex-row items-center h-[90vh]">
         <img className="h-[45vh] rounded-2xl mr-20" src={logInImg} alt="VR Scan Image" />
