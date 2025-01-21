@@ -1,13 +1,45 @@
-type FilterSectionProps = {
-  title: string;
-  options: string[];
-  isOpen: boolean;
-  onToggle: () => void;
+import { useEffect, useState } from "react";
+
+type FilterOption = {
+  id: number;
+  name: string;
 };
 
-export default function FilterSection({ title, options, isOpen, onToggle }: FilterSectionProps) {
+type FilterSectionProps = {
+  title: string;
+  options: FilterOption[];
+  isOpen: boolean;
+  onToggle?: () => void;
+  onUpdate?: (selection: Set<number>) => void;
+};
+
+export default function FilterSection({
+  title,
+  options,
+  isOpen,
+  onToggle,
+  onUpdate
+}: FilterSectionProps) {
+  const [selection, setSelection] = useState<Set<number>>(new Set());
+
+  useEffect(() => {
+    onUpdate?.(selection);
+  }, [selection]);
+
   // Limit options to the first 4 for each filter when the current filter isn't expanded
   const displayedOptions = isOpen ? options : options.slice(0, 4);
+
+  const toggleOption = (option: FilterOption) => {
+    if (selection.has(option.id)) {
+      const newSelection = new Set(selection);
+      newSelection.delete(option.id);
+      setSelection(newSelection);
+    } else {
+      const newSelection = new Set(selection);
+      newSelection.add(option.id);
+      setSelection(newSelection);
+    }
+  };
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-md border border-gray-200">
@@ -24,10 +56,12 @@ export default function FilterSection({ title, options, isOpen, onToggle }: Filt
             <input
               type="checkbox"
               id={`${title}-${index}`}
+              checked={selection.has(option.id)}
+              onChange={() => toggleOption(option)}
               className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
             />
             <label htmlFor={`${title}-${index}`} className="text-sm text-gray-700">
-              {option}
+              {option.name}
             </label>
           </li>
         ))}
