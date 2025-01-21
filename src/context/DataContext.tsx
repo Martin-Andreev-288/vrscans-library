@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { apiClient } from "../utils/apiClient";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 import { type VRScan } from "../utils/types";
 
 type FilterSelection = {
@@ -11,8 +13,12 @@ type FilterSelection = {
 type DataContextType = {
   vrscans: VRScan[];
   updateVrscans: () => Promise<void>;
+  favs: VRScan[];
+  updateFavs: () => void;
   filterSelection: FilterSelection;
   setFilterSelection: (selection: FilterSelection) => void;
+  favsFilterSelection: FilterSelection;
+  setFavsFilterSelection: (selection: FilterSelection) => void;
   isLoading: boolean;
   error: string | null;
 };
@@ -22,10 +28,20 @@ const DataContext = createContext<DataContextType | undefined>(undefined);
 export function DataProvider({ children }: { children: React.ReactNode }) {
   const [vrscans, setVrscans] = useState<VRScan[]>([]);
   const [allVrscans, setAllVrscans] = useState<VRScan[]>([]);
+  const [favs, setFavs] = useState<VRScan[]>([]);
+  const [allFavs, setAllFavs] = useState<VRScan[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  // tuk dolu shte syrhanqvame id-tata na materialite, color-ite i cvetovete
+
+  const favProducts = useSelector((state: RootState) => state.favItems);
+
   const [filterSelection, setFilterSelection] = useState<FilterSelection>({
+    materials: new Set(),
+    colors: new Set(),
+    tags: new Set()
+  });
+
+  const [favsFilterSelection, setFavsFilterSelection] = useState<FilterSelection>({
     materials: new Set(),
     colors: new Set(),
     tags: new Set()
@@ -45,7 +61,6 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     });
 
   useEffect(() => {
-    // console.log(filterSelection);
     setVrscans(filterVrscans(allVrscans));
   }, [filterSelection]);
 
@@ -64,13 +79,41 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  const filterFavs = (favs: VRScan[]) =>
+    favs.filter((fav) => {
+      const acceptsMaterials =
+        !favsFilterSelection.materials.size ||
+        favsFilterSelection.materials.has(fav.materialTypeId);
+      const acceptsColors =
+        !favsFilterSelection.colors.size ||
+        fav.colors.some((color) => favsFilterSelection.colors.has(color));
+      const acceptsTags =
+        !favsFilterSelection.tags.size || fav.tags.some((tag) => favsFilterSelection.tags.has(tag));
+
+      return acceptsMaterials && acceptsColors && acceptsTags;
+    });
+
+  useEffect(() => {
+    setFavs(filterFavs(allFavs));
+  }, [favsFilterSelection]);
+
+  function updateFavs() {
+    // const favProducts = useSelector((state: RootState) => state.favItems);
+    setAllFavs(favProducts);
+    setFavs(filterFavs(favProducts));
+  }
+
   return (
     <DataContext.Provider
       value={{
         vrscans,
         updateVrscans,
+        favs,
+        updateFavs,
         filterSelection,
         setFilterSelection,
+        favsFilterSelection,
+        setFavsFilterSelection,
         isLoading,
         error
       }}

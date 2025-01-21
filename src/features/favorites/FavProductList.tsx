@@ -1,12 +1,16 @@
 import ProductCard from "../products/ProductCard";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
 import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
 import { NavLink } from "react-router-dom";
 import { Button } from "../../components";
+import { useEffect } from "react";
+import { useDataContext } from "../../context/DataContext";
 
 export default function ProductList() {
-  const favProducts = useSelector((state: RootState) => state.favItems);
+  const { favs, updateFavs } = useDataContext();
+
+  useEffect(() => {
+    updateFavs();
+  }, []);
 
   const { colors, industries, manufacturers, materials, tags } = useFetchFiltersData();
 
@@ -15,9 +19,9 @@ export default function ProductList() {
 
   return (
     <>
-      {favProducts.length ? (
+      {favs.length ? (
         <ul className="card-container">
-          {favProducts.map((product) => (
+          {favs.map((product) => (
             <ProductCard
               key={product.id}
               item={product}
