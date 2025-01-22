@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import productImage from "/src/assets/profileImg.png";
 import { FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { getUserFromStorage } from "../../store/slices/userSlice";
 
 export default function ProfileSidebar() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
+
+  const userState = getUserFromStorage();
 
   useEffect(() => {
     const storedImage = localStorage.getItem("profileImage");
@@ -45,9 +48,8 @@ export default function ProfileSidebar() {
           Edit Profile Image
           <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
         </label>
-        <h2 className="mt-8 text-xl font-bold">Francesco Acerbi</h2>
-        <h2 className="mt-2 text-gray-600">React Developer</h2>
-        <h2 className="text-gray-600">seamann@gmail.com</h2>
+        <h2 className="mt-8 text-xl font-bold">{userState?.username}</h2>
+        <h2 className="text-gray-600">{userState?.email}</h2>
       </div>
     </div>
   );
