@@ -63,3 +63,9 @@ export type CollectionState = {
   title: string;
   items: VRScan[];
 };
+
+export type FilterSelection = {
+  materials: Set<number>;
+  colors: Set<number>;
+  tags: Set<number>;
+};

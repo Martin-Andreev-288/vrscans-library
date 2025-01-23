@@ -2,11 +2,43 @@ import ProductCard from "../products/ProductCard";
 import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
 import { NavLink } from "react-router-dom";
 import { Button } from "../../components";
-import { useEffect } from "react";
-import { useDataContext } from "../../context/DataContext";
+import { useEffect, useState } from "react";
+import { type VRScan, type FilterSelection } from "../../utils/types";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
-export default function ProductList() {
-  const { favs, updateFavs } = useDataContext();
+type FavProductsListProps = {
+  favsFilterSelection: FilterSelection;
+};
+
+export default function FavProductList({ favsFilterSelection }: FavProductsListProps) {
+  const [favs, setFavs] = useState<VRScan[]>([]);
+  const [allFavs, setAllFavs] = useState<VRScan[]>([]);
+
+  const favProducts = useSelector((state: RootState) => state.favItems);
+
+  const filterFavs = (favs: VRScan[]) =>
+    favs.filter((fav) => {
+      const acceptsMaterials =
+        !favsFilterSelection.materials.size ||
+        favsFilterSelection.materials.has(fav.materialTypeId);
+      const acceptsColors =
+        !favsFilterSelection.colors.size ||
+        fav.colors.some((color) => favsFilterSelection.colors.has(color));
+      const acceptsTags =
+        !favsFilterSelection.tags.size || fav.tags.some((tag) => favsFilterSelection.tags.has(tag));
+
+      return acceptsMaterials && acceptsColors && acceptsTags;
+    });
+
+  useEffect(() => {
+    setFavs(filterFavs(allFavs));
+  }, [favsFilterSelection]);
+
+  function updateFavs() {
+    setAllFavs(favProducts);
+    setFavs(filterFavs(favProducts));
+  }
 
   useEffect(() => {
     updateFavs();

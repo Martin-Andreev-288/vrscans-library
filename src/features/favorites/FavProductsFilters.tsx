@@ -1,11 +1,17 @@
 import { useState } from "react";
 import { FilterSection } from "../../components";
 import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
-import { useDataContext } from "../../context/DataContext";
+import { type FilterSelection } from "../../utils/types";
 
-export default function FavProductsFilters() {
-  const { favsFilterSelection, setFavsFilterSelection } = useDataContext();
+type FavProductsFiltersProps = {
+  favsFilterSelection: FilterSelection;
+  setFavsFilterSelection: (selection: FilterSelection) => void;
+};
 
+export default function FavProductsFilters({
+  favsFilterSelection,
+  setFavsFilterSelection
+}: FavProductsFiltersProps) {
   const { colors, materials, tags } = useFetchFiltersData();
   const [expandedFilter, setExpandedFilter] = useState<string | null>(null);
   const toggleFilter = (filter: string) => {
