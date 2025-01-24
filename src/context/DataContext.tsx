@@ -13,11 +13,18 @@ type DataContextType = {
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
+function createQueryParamsFromFilterSelection(selection: FilterSelection) {
+  // expected: [["colors", "3"], ["colors", "16"], ["tags", "35"]]
+  const result: [string, string][] = [];
+  selection.colors.forEach((color) => result.push(["colors", String(color)]));
+  selection.materials.forEach((material) => result.push(["materials", String(material)]));
+  selection.tags.forEach((tag) => result.push(["tags", String(tag)]));
+  return String(new URLSearchParams(result));
+}
+
 export function DataProvider({ children }: { children: React.ReactNode }) {
   const [vrscans, setVrscans] = useState<VRScan[]>([]);
-  const [allVrscans, setAllVrscans] = useState<VRScan[]>([]);
-  const [favs, setFavs] = useState<VRScan[]>([]);
-  const [allFavs, setAllFavs] = useState<VRScan[]>([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,29 +34,16 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     tags: new Set()
   });
 
-  const filterVrscans = (vrscans: VRScan[]) =>
-    vrscans.filter((vrscan) => {
-      const acceptsMaterials =
-        !filterSelection.materials.size || filterSelection.materials.has(vrscan.materialTypeId);
-      const acceptsColors =
-        !filterSelection.colors.size ||
-        vrscan.colors.some((color) => filterSelection.colors.has(color));
-      const acceptsTags =
-        !filterSelection.tags.size || vrscan.tags.some((tag) => filterSelection.tags.has(tag));
-
-      return acceptsMaterials && acceptsColors && acceptsTags;
-    });
-
   useEffect(() => {
-    setVrscans(filterVrscans(allVrscans));
+    updateVrscans();
   }, [filterSelection]);
 
   async function updateVrscans(): Promise<void> {
     setIsLoading(true);
     try {
-      const vrscansResponse = await apiClient.get<VRScan[]>("/vrscans");
-      setAllVrscans(vrscansResponse.data);
-      setVrscans(filterVrscans(vrscansResponse.data));
+      const query = createQueryParamsFromFilterSelection(filterSelection);
+      const vrscansResponse = await apiClient.get<VRScan[]>(`/searchVrscans?${query}`);
+      setVrscans(vrscansResponse.data);
       setError(null);
     } catch (error) {
       console.error("Failed to fetch VRScans:", error);
