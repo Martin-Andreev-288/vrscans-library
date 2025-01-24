@@ -4,11 +4,13 @@ import { type VRScan, type FilterSelection } from "../utils/types";
 
 type DataContextType = {
   vrscans: VRScan[];
-  updateVrscans: () => Promise<void>;
+  refreshVrscans: () => Promise<void>;
+  loadMoreVrscans: () => Promise<void>;
   filterSelection: FilterSelection;
   setFilterSelection: (selection: FilterSelection) => void;
   isLoading: boolean;
   error: string | null;
+  hasMore: boolean;
 };
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -24,7 +26,8 @@ function createQueryParamsFromFilterSelection(selection: FilterSelection) {
 
 export function DataProvider({ children }: { children: React.ReactNode }) {
   const [vrscans, setVrscans] = useState<VRScan[]>([]);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,19 +38,44 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   });
 
   useEffect(() => {
-    updateVrscans();
+    refreshVrscans();
   }, [filterSelection]);
 
-  async function updateVrscans(): Promise<void> {
+  async function refreshVrscans(): Promise<void> {
     setIsLoading(true);
     try {
       const query = createQueryParamsFromFilterSelection(filterSelection);
-      const vrscansResponse = await apiClient.get<VRScan[]>(`/searchVrscans?${query}`);
+      const vrscansResponse = await apiClient.get<VRScan[]>(`/searchVrscans?${query}&page=1`);
       setVrscans(vrscansResponse.data);
+      setCurrentPage(1);
+      setHasMore(vrscansResponse.data.length === 20);
       setError(null);
     } catch (error) {
-      console.error("Failed to fetch VRScans:", error);
-      setError("Failed to fetch VRScans");
+      console.error("Failed to refresh VRScans:", error);
+      setError("Failed to refresh VRScans");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function loadMoreVrscans(): Promise<void> {
+    if (!hasMore || isLoading) return;
+
+    setIsLoading(true);
+    try {
+      const nextPage = currentPage + 1;
+      const query = createQueryParamsFromFilterSelection(filterSelection);
+      const vrscansResponse = await apiClient.get<VRScan[]>(
+        `/searchVrscans?${query}&page=${nextPage}`
+      );
+
+      setVrscans((prev) => [...prev, ...vrscansResponse.data]);
+      setCurrentPage(nextPage);
+      setHasMore(vrscansResponse.data.length === 20);
+      setError(null);
+    } catch (error) {
+      console.error("Failed to load more VRScans:", error);
+      setError("Failed to load more VRScans");
     } finally {
       setIsLoading(false);
     }
@@ -57,11 +85,13 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     <DataContext.Provider
       value={{
         vrscans,
-        updateVrscans,
+        refreshVrscans,
+        loadMoreVrscans,
         filterSelection,
         setFilterSelection,
         isLoading,
-        error
+        error,
+        hasMore
       }}
     >
       {children}
