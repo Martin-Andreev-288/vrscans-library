@@ -7,14 +7,62 @@ import { removeCollection } from "../../store/slices/collectionsSlice";
 import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { useEffect, useState, useCallback } from "react";
+import { type VRScan, type FilterSelection } from "../../utils/types";
 
 type CollectionCardsProps = {
   viewingItems: string | null;
   setViewingItems: React.Dispatch<React.SetStateAction<string | null>>;
+  collItemsFilterSelection: FilterSelection;
 };
 
-export default function CollectionCards({ viewingItems, setViewingItems }: CollectionCardsProps) {
+export default function CollectionCards({
+  viewingItems,
+  setViewingItems,
+  collItemsFilterSelection
+}: CollectionCardsProps) {
+  const [collItems, setCollItems] = useState<VRScan[]>([]);
+  const [allCollItems, setAllCollItems] = useState<VRScan[]>([]);
+
   const collections = useSelector((state: RootState) => state.collections);
+
+  // collection items logic
+  const currentCollection = collections.find((col) => col.title === viewingItems);
+  const currentCollectionItems = currentCollection?.items || [];
+
+  const filterCollItems = useCallback(
+    (items: VRScan[]) => {
+      return items.filter((fav) => {
+        const acceptsMaterials =
+          !collItemsFilterSelection.materials.size ||
+          collItemsFilterSelection.materials.has(fav.materialTypeId);
+        const acceptsColors =
+          !collItemsFilterSelection.colors.size ||
+          fav.colors.some((color) => collItemsFilterSelection.colors.has(color));
+        const acceptsTags =
+          !collItemsFilterSelection.tags.size ||
+          fav.tags.some((tag) => collItemsFilterSelection.tags.has(tag));
+
+        return acceptsMaterials && acceptsColors && acceptsTags;
+      });
+    },
+    [collItemsFilterSelection]
+  );
+
+  // Handle initial load and collection changes
+  useEffect(() => {
+    if (viewingItems && currentCollection) {
+      setAllCollItems(currentCollectionItems);
+      setCollItems(filterCollItems(currentCollectionItems));
+    }
+  }, [viewingItems, currentCollection]);
+
+  // Handle filter changes
+  useEffect(() => {
+    if (viewingItems) {
+      setCollItems(filterCollItems(allCollItems));
+    }
+  }, [collItemsFilterSelection, allCollItems]);
 
   const { colors, industries, manufacturers, materials, tags } = useFetchFiltersData();
 
@@ -66,8 +114,6 @@ export default function CollectionCards({ viewingItems, setViewingItems }: Colle
   );
 
   const renderCollectionItems = () => {
-    const currentCollection = collections.find((col) => col.title === viewingItems);
-
     if (!currentCollection) {
       return (
         <div className="text-center text-gray-500">
@@ -78,9 +124,9 @@ export default function CollectionCards({ viewingItems, setViewingItems }: Colle
 
     return (
       <>
-        {currentCollection?.items.length ? (
+        {collItems.length ? (
           <ul className="card-container">
-            {currentCollection.items.map((item) => (
+            {collItems.map((item) => (
               <CollectionProductCard
                 key={item.id}
                 item={item}
