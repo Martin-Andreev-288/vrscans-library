@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FilterSection } from "../../components";
 import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
 import { type FilterSelection } from "../../utils/types";
@@ -18,11 +18,14 @@ export default function FavProductsFilters({
     setExpandedFilter(expandedFilter === filter ? null : filter);
   };
 
-  const updateSelection = (selection: Set<number>, type: "materials" | "colors" | "tags") => {
-    const newFilterSelection = { ...favsFilterSelection };
-    newFilterSelection[type] = selection;
-    setFavsFilterSelection(newFilterSelection);
-  };
+  const updateSelection = useCallback(
+    (selection: Set<number>, type: "materials" | "colors" | "tags") => {
+      const newFilterSelection = { ...favsFilterSelection };
+      newFilterSelection[type] = selection;
+      setFavsFilterSelection(newFilterSelection);
+    },
+    []
+  );
 
   return (
     <div className="space-y-6">
