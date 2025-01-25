@@ -24,11 +24,11 @@ export type Manufacturer = {
   name: string;
   created_at: string;
   updated_at: string;
-  logo_file_name: string;
-  logo_content_type: string;
-  logo_file_size: number;
-  logo_updated_at: string;
-  website: string;
+  logo_file_name: string | null;
+  logo_content_type: string | null;
+  logo_file_size: number | null;
+  logo_updated_at: string | null;
+  website: string | null;
 };
 
 export type Industry = {
