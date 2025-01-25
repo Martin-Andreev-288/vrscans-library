@@ -1,5 +1,5 @@
 import { useNavigate, Form, ActionFunction, redirect } from "react-router-dom";
-import { DefaultInput, Button } from "../../components";
+import { DefaultInput, Button, AccessDenied } from "../../components";
 import { ProfileSidebar } from "../../features";
 import { useDispatch } from "react-redux";
 import { getUserFromStorage, editProfile, logoutUser } from "../../store/slices/userSlice";
@@ -53,6 +53,7 @@ export default function Profile() {
   const navigate = useNavigate();
 
   const user = useSelector((state: RootState) => state.userState.user);
+  if (!user) return <AccessDenied />;
 
   const handleLogout = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

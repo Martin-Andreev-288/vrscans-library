@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { FavProductsFilters, FavProductList } from "../../features";
 import { type FilterSelection } from "../../utils/types";
+import { AccessDenied } from "../../components";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 export default function Favorites() {
   const [favsFilterSelection, setFavsFilterSelection] = useState<FilterSelection>({
@@ -8,6 +11,10 @@ export default function Favorites() {
     colors: new Set(),
     tags: new Set()
   });
+
+  const user = useSelector((state: RootState) => state.userState.user);
+
+  if (!user) return <AccessDenied />;
 
   return (
     <div className="main">

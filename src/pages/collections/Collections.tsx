@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { CollectionCards, CollectionProductsFilters, CollectionsSidebar } from "../../features";
 import { type FilterSelection } from "../../utils/types";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { AccessDenied } from "../../components";
 
 export default function Collections() {
   const [viewingItems, setViewingItems] = useState<string | null>(null);
@@ -10,7 +13,10 @@ export default function Collections() {
     tags: new Set()
   });
 
+  const user = useSelector((state: RootState) => state.userState.user);
   const title = viewingItems ? `Items in '${viewingItems}'` : "Collections";
+
+  if (!user) return <AccessDenied />;
 
   return (
     <div className="main">
