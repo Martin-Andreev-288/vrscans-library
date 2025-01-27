@@ -3,7 +3,6 @@ import { FaTimes } from "react-icons/fa";
 import fontModalImage from "/src/assets/addCollectionImg.png";
 import { ModalWrapper } from "../../components";
 import useClickOutside from "../../hooks/useClickOutside";
-import { CiSearch } from "react-icons/ci";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { useDispatch } from "react-redux";
@@ -65,14 +64,9 @@ export default function AddToCollectionModal({ onClose, item }: AddToCollectionM
         {/* Modal Title */}
         <h2 className="text-xl font-semibold text-center mb-6">Add to Collection</h2>
 
-        {/* Search Input */}
-        <div className="relative mb-6">
-          <input
-            type="text"
-            placeholder="Search collections..."
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-          <CiSearch className="w-5 h-5 absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-400" />
+        {/* Collections Selection Header */}
+        <div className="mb-6">
+          <h3 className="text-gray-700 font-medium text-center">Select from your collections:</h3>
         </div>
 
         {/* List of Collections */}

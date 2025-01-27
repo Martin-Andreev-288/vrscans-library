@@ -32,9 +32,6 @@ export default function CollectionsSidebar() {
 
         {/* Sorting Options */}
         <div className="relative">
-          <Button type="sortByButton" onClick={toggleDropdown}>
-            Sort By <FaChevronDown className="ml-2" />
-          </Button>
           {isDropdownOpen && (
             <div className="absolute right-0 mt-2 w-28 bg-white border rounded-md shadow-lg z-10">
               <button
