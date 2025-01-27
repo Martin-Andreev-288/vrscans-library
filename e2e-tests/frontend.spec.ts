@@ -3,6 +3,12 @@ import { test, expect } from "@playwright/test";
 const appUrl = "https://martin-andreev-288.github.io";
 
 test.describe("landing page", () => {
+  test("render the Login / Signup button to the guest users", async ({ page }) => {
+    await page.goto(appUrl);
+
+    await expect(page.getByRole("button", { name: "Login / Signup" })).toBeVisible();
+  });
+
   test("logging in works", async ({ page }) => {
     await page.goto(appUrl);
 
