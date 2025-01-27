@@ -19,6 +19,7 @@ export default function DefaultInput({
         {labeltext || name}
       </label>
       <input
+        id={name}
         type={type}
         name={name}
         placeholder={placeholder}
