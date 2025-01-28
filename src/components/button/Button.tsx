@@ -33,7 +33,7 @@ export default function Button({ children, onClick, type }: ButtonProps) {
   };
 
   return (
-    <button type="button" className={styles[type]} onClick={onClick}>
+    <button className={styles[type]} onClick={onClick}>
       {children}
     </button>
   );

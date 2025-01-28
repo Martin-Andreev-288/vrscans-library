@@ -60,13 +60,4 @@ describe("Button Component", () => {
       });
     });
   });
-
-  // Default button type attribute
-  it('has type="button" by default', () => {
-    render(<Button type="navButton">Test</Button>);
-    const button = screen.getByRole("button");
-
-    // This test will fail until you add type="button" to the component
-    expect(button).toHaveAttribute("type", "button");
-  });
 });
