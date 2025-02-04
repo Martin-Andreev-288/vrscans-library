@@ -79,10 +79,10 @@ export default function CollectionCards({
               key={collection.title}
               className="relative flex flex-col h-[320px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
             >
-              {/* Buttons */}
+              {/* Trash Button */}
               <button
                 className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
-                onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                onClick={(e) => {
                   e.stopPropagation();
                   dispatch(removeCollection(collection.title));
                 }}
@@ -101,9 +101,11 @@ export default function CollectionCards({
               <h3 className="text-lg text-center font-semibold mb-2">{collection.title}</h3>
 
               {/* View Items Button */}
-              <Button type="viewItemsButton" onClick={() => setViewingItems(collection.title)}>
-                View Items
-              </Button>
+              <div className="mt-auto text-center">
+                <Button type="viewItemsButton" onClick={() => setViewingItems(collection.title)}>
+                  View Items
+                </Button>
+              </div>
             </li>
           ))}
         </ul>
