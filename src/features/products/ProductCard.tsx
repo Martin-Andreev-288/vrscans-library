@@ -62,43 +62,43 @@ export default function ProductCard({
   return (
     <>
       <li
-        className="relative flex flex-col h-[320px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
+        className="relative flex flex-col h-[320px] w-full bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
         onClick={() => setProductModalOpen(true)}
       >
-        {/* Buttons */}
-        {user && (
-          <>
-            <button
-              className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
-              onClick={(event) => {
-                event.stopPropagation();
-                setIsCollectionModalOpen(true);
-              }}
-            >
-              +
-            </button>
-            <button
-              className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
-              onClick={handleToggleFavorite}
-            >
-              {isFavorite(item.id) ? "♥" : "♡"}
-            </button>
-          </>
-        )}
-
-        {/* Image */}
-        <img
-          src={thumb}
-          alt="image not found"
-          className="w-full h-40 object-fill rounded-md mb-4"
-        />
+        <div className="relative bg-gray-50 p-2 rounded-lg border border-gray-100 mb-4 group">
+          {/* Buttons */}
+          {user && (
+            <>
+              <button
+                className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setIsCollectionModalOpen(true);
+                }}
+              >
+                +
+              </button>
+              <button
+                className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
+                onClick={handleToggleFavorite}
+              >
+                {isFavorite(item.id) ? "♥" : "♡"}
+              </button>
+            </>
+          )}
+          <img
+            src={thumb}
+            alt="image not found"
+            className="w-full h-40 object-contain rounded-md transition-transform duration-300 group-hover:scale-95"
+          />
+        </div>
 
         {/* Content */}
         <div className="text-center">
           <h3 className="text-lg font-semibold mb-2">{name}</h3>
           <ul className="text-left text-sm">
-            <li className="pl-2">{material}</li>
-            <li className="pl-2">Manufacturer: {manufacturer}</li>
+            <li className="pl-6">{material}</li>
+            <li className="pl-6">Manufacturer: {manufacturer}</li>
           </ul>
         </div>
       </li>
