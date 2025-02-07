@@ -65,12 +65,12 @@ export default function ProductCard({
         className="relative flex flex-col h-[320px] w-full bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
         onClick={() => setProductModalOpen(true)}
       >
-        <div className="relative bg-gray-50 p-2 rounded-lg border border-gray-100 mb-4 group">
+        <div className="relative bg-gray-50 p-2 rounded-lg border border-gray-100 mb-4 group z-0">
           {/* Buttons */}
           {user && (
             <>
               <button
-                className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
+                className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300 z-20"
                 onClick={(event) => {
                   event.stopPropagation();
                   setIsCollectionModalOpen(true);
@@ -79,7 +79,7 @@ export default function ProductCard({
                 +
               </button>
               <button
-                className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
+                className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300 z-20"
                 onClick={handleToggleFavorite}
               >
                 {isFavorite(item.id) ? "♥" : "♡"}
