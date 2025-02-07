@@ -77,31 +77,33 @@ export default function CollectionCards({
           {collections.map((collection) => (
             <li
               key={collection.title}
-              className="relative flex flex-col h-[320px] w-full p-4 bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
+              className="relative flex flex-col h-[320px] w-full bg-white border rounded-lg shadow-md cursor-pointer hover:bg-gray-100 hover:shadow-lg hover:scale-105 transition-transform duration-200"
             >
-              {/* Trash Button */}
-              <button
-                className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  dispatch(removeCollection(collection.title));
-                }}
-              >
-                <FiTrash />
-              </button>
+              <div className="relative bg-gray-50 p-2 rounded-lg border border-gray-100 mb-4 group z-0">
+                {/* Trash Button */}
+                <button
+                  className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300 z-20"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    dispatch(removeCollection(collection.title));
+                  }}
+                >
+                  <FiTrash />
+                </button>
 
-              {/* Image */}
-              <img
-                src={collectionImage}
-                alt="image not found"
-                className="w-full h-40 object-fill rounded-md mb-4"
-              />
+                {/* Image */}
+                <img
+                  src={collectionImage}
+                  alt="image not found"
+                  className="w-full h-40 object-contain rounded-md transition-transform duration-300 group-hover:scale-95"
+                />
+              </div>
 
               {/* Title */}
               <h3 className="text-lg text-center font-semibold mb-2">{collection.title}</h3>
 
               {/* View Items Button */}
-              <div className="mt-auto text-center">
+              <div className="mt-auto mb-[10px] text-center">
                 <Button type="viewItemsButton" onClick={() => setViewingItems(collection.title)}>
                   View Items
                 </Button>

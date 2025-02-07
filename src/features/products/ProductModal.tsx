@@ -29,11 +29,11 @@ export default function ProductModal({
       {/* Modal Card */}
       <div ref={modalRef} className="bg-white rounded-lg shadow-lg w-[90%] max-w-4xl p-4 flex">
         {/* Left Section - Image */}
-        <div className="relative w-1/2 flex items-end justify-center">
+        <div className="relative w-1/2 flex items-end justify-center bg-gray-100 p-2 rounded-lg border border-gray-100 mb-4 group">
           <img
             src={thumb}
             alt="image not found"
-            className="w-[80%] h-auto object-cover rounded-md mb-4"
+            className="w-[80%] h-auto object-cover rounded-md mb-4 transition-transform duration-300 group-hover:scale-95"
           />
           {/* Buttons */}
           {user && (
