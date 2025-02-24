@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const appUrl = "https://martin-andreev-288.github.io";
+const appUrl = "https://vrscanslibrarynm.vercel.app";
 
 test.describe("landing page", () => {
   test("render the Login / Signup button to the guest users", async ({ page }) => {
