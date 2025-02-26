@@ -24,7 +24,7 @@ export default function Button({ children, onClick, type }: ButtonProps) {
     logInButton:
       "w-full cursor-pointer rounded-md border border-primary bg-black px-5 py-3 text-base font-medium text-white transition hover:bg-opacity-90",
     createCollectionButton:
-      "flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700",
+      "flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white  font-medium  rounded-xl shadow-lg hover:shadow-xl hover:bg-gradient-to-r hover:from-indigo-700 hover:to-purple-700 transform transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 tracking-wide",
     sortByButton:
       "flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none",
     viewItemsButton:
