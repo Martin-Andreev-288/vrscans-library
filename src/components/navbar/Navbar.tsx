@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import Logo from "./Logo";
 import Button from "../button/Button";
 import { useSelector } from "react-redux";

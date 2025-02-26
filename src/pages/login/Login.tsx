@@ -2,7 +2,7 @@ import logo from "../../assets/logo.png";
 import logInImg from "../../assets/sign-in-img.png";
 import DefaultInput from "../../components/defaultInput/DefaultInput";
 import Button from "../../components/button/Button";
-import { Form, redirect, Link, NavLink, type ActionFunction } from "react-router-dom";
+import { Form, redirect, Link, NavLink, type ActionFunction } from "react-router";
 import { apiClient } from "../../utils/apiClient";
 import { toast } from "react-toastify";
 import { type ReduxStore } from "../../store/store";

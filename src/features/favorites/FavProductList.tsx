@@ -1,6 +1,6 @@
 import ProductCard from "../products/ProductCard";
 import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import { Button } from "../../components";
 import { useCallback, useEffect, useState } from "react";
 import { type VRScan, type FilterSelection } from "../../utils/types";

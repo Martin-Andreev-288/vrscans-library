@@ -2,7 +2,7 @@ import logo from "../../assets/logo.png";
 import logInImg from "../../assets/sign-in-img.png";
 import DefaultInput from "../../components/defaultInput/DefaultInput";
 import Button from "../../components/button/Button";
-import { type ActionFunction, Form, Link, NavLink, redirect } from "react-router-dom";
+import { type ActionFunction, Form, Link, NavLink, redirect } from "react-router";
 import { apiClient } from "../../utils/apiClient";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";

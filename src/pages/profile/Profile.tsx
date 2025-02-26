@@ -1,4 +1,4 @@
-import { useNavigate, Form, ActionFunction, redirect } from "react-router-dom";
+import { useNavigate, Form, ActionFunction, redirect } from "react-router";
 import { DefaultInput, Button, AccessDenied } from "../../components";
 import { ProfileSidebar } from "../../features";
 import { useDispatch } from "react-redux";
