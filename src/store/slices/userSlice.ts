@@ -7,7 +7,7 @@ export type User = {
   jwt: string;
 };
 
-type UserState = {
+export type UserState = {
   user: User | null;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
