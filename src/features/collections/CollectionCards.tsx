@@ -1,14 +1,12 @@
 import collectionImage from "/src/assets/imgCollection.png";
 import { Button } from "../../components";
-import CollectionProductCard from "./CollectionProductCard";
 import { FiTrash } from "react-icons/fi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeCollection } from "../../store/slices/collectionsSlice";
-import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
-import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { useEffect, useState, useCallback } from "react";
 import { type VRScan, type FilterSelection } from "../../utils/types";
+import CollectionItems from "./CollectionItems";
 
 type CollectionCardsProps = {
   viewingItems: string | null;
@@ -63,8 +61,6 @@ export default function CollectionCards({
       setCollItems(filterCollItems(allCollItems));
     }
   }, [collItemsFilterSelection, allCollItems]);
-
-  const { colors, industries, manufacturers, materials, tags } = useFetchFiltersData();
 
   const dispatch = useDispatch();
 
@@ -127,49 +123,11 @@ export default function CollectionCards({
     }
 
     return (
-      <>
-        {collItems.length ? (
-          <ul className="card-container">
-            {collItems.map((item) => (
-              <CollectionProductCard
-                key={item.id}
-                item={item}
-                name={item.name}
-                thumb={item.thumb}
-                fileName={item.fileName}
-                material={
-                  materials.find((m) => m.id === item.materialTypeId)?.name || "Unknown Material"
-                }
-                manufacturer={
-                  manufacturers.find((m) => m.id === item.manufacturerId)?.name ||
-                  "Unknown Manufacturer"
-                }
-                industries={
-                  item.industries
-                    .map((id) => industries.find((ind) => ind.id === id)?.name)
-                    .join(", ") || "Unknown Industries"
-                }
-                colors={
-                  item.colors.map((id) => colors.find((col) => col.id === id)?.name).join(", ") ||
-                  "Unknown Colors"
-                }
-                tags={
-                  item.tags.map((id) => tags.find((tag) => tag.id === id)?.name).join(", ") ||
-                  "Unknown Tags"
-                }
-                collectionTitle={currentCollection.title}
-              />
-            ))}
-          </ul>
-        ) : (
-          <p className="text-center text-gray-500">No items in this collection.</p>
-        )}
-        <div className="mt-6 flex justify-center">
-          <Button type="viewItemsButton" onClick={() => setViewingItems(null)}>
-            Back to Collections
-          </Button>
-        </div>
-      </>
+      <CollectionItems
+        collItems={collItems}
+        currentCollection={currentCollection}
+        setViewingItems={setViewingItems}
+      />
     );
   };
 
