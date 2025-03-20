@@ -10,10 +10,10 @@ type CollectionCardsProps = {
 };
 
 function CollectionCards({ title, setViewingItems }: CollectionCardsProps) {
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleteCollModalOpen, setIsDeleteCollModalOpen] = useState(false);
 
-  const handleDeleteModalClose = () => {
-    setIsDeleteModalOpen(false);
+  const handleDeleteCollModalClose = () => {
+    setIsDeleteCollModalOpen(false);
   };
   return (
     <>
@@ -26,7 +26,7 @@ function CollectionCards({ title, setViewingItems }: CollectionCardsProps) {
             className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300 z-20"
             onClick={(event) => {
               event.stopPropagation();
-              setIsDeleteModalOpen(true);
+              setIsDeleteCollModalOpen(true);
             }}
           >
             <FiTrash />
@@ -44,7 +44,9 @@ function CollectionCards({ title, setViewingItems }: CollectionCardsProps) {
           </Button>
         </div>
       </li>
-      {isDeleteModalOpen && <DeleteCollModal onClose={handleDeleteModalClose} title={title} />}
+      {isDeleteCollModalOpen && (
+        <DeleteCollModal onClose={handleDeleteCollModalClose} title={title} />
+      )}
     </>
   );
 }
