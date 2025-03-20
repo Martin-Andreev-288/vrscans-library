@@ -1,8 +1,8 @@
+import { useState } from "react";
 import collectionImage from "/src/assets/imgCollection.png";
 import { Button } from "../../components";
 import { FiTrash } from "react-icons/fi";
-import { useDispatch } from "react-redux";
-import { removeCollection } from "../../store/slices/collectionsSlice";
+import DeleteCollModal from "./DeleteCollModal";
 
 type CollectionCardsProps = {
   title: string;
@@ -10,7 +10,11 @@ type CollectionCardsProps = {
 };
 
 function CollectionCards({ title, setViewingItems }: CollectionCardsProps) {
-  const dispatch = useDispatch();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalOpen(false);
+  };
   return (
     <>
       <li
@@ -20,9 +24,9 @@ function CollectionCards({ title, setViewingItems }: CollectionCardsProps) {
         <div className="relative bg-gray-50 p-2 rounded-lg border border-gray-100 mb-4 group z-0">
           <button
             className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300 z-20"
-            onClick={(e) => {
-              e.stopPropagation();
-              dispatch(removeCollection(title));
+            onClick={(event) => {
+              event.stopPropagation();
+              setIsDeleteModalOpen(true);
             }}
           >
             <FiTrash />
@@ -40,6 +44,7 @@ function CollectionCards({ title, setViewingItems }: CollectionCardsProps) {
           </Button>
         </div>
       </li>
+      {isDeleteModalOpen && <DeleteCollModal onClose={handleDeleteModalClose} title={title} />}
     </>
   );
 }

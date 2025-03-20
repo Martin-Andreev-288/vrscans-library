@@ -27,9 +27,10 @@ const collectionsSlice = createSlice({
       toast.success("Collection created", { autoClose: 2000 });
     },
     removeCollection: (state, action: PayloadAction<string>) => {
+      const collectionTitle = action.payload;
       const updatedState = state.filter((collection) => collection.title !== action.payload);
       saveCollectionsToLocalStorage(updatedState);
-      toast.success("Collection removed", { autoClose: 2000 });
+      toast.success(`Collection "${collectionTitle}" removed`, { autoClose: 2000 });
       return updatedState;
     },
     addItemToCollection: (
