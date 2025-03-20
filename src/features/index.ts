@@ -1,4 +1,4 @@
-export { default as CollectionCards } from "./collections/CollectionCards";
+export { default as CollectionsContainer } from "./collections/CollectionsContainer";
 export { default as CollectionsSidebar } from "./collections/CollectionsSidebar";
 export { default as ProductCard } from "./products/ProductCard";
 export { default as ProductsFilters } from "./products/ProductsFilters";

@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { CollectionCards, CollectionProductsFilters, CollectionsSidebar } from "../../features";
+import {
+  CollectionsContainer,
+  CollectionProductsFilters,
+  CollectionsSidebar
+} from "../../features";
 import { type FilterSelection } from "../../utils/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
@@ -32,7 +36,7 @@ export default function Collections() {
       </aside>
       <div className="p-2 pt-0">
         <h1 className="text-xl font-bold mb-6 text-center">{title}</h1>
-        <CollectionCards
+        <CollectionsContainer
           viewingItems={viewingItems}
           setViewingItems={setViewingItems}
           collItemsFilterSelection={collItemsFilterSelection}
