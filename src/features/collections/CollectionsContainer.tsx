@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import CollectionItemsContainer from "./CollectionItemsContainer";
-import CollectionCards from "./CollectionCards";
+import CollectionCard from "./CollectionCard";
 import { type FilterSelection } from "../../utils/types";
 
 type CollectionContainerProps = {
@@ -34,7 +34,7 @@ export default function CollectionContainerContainer({
       {collections.length ? (
         <ul className="card-container">
           {collections.map((collection) => (
-            <CollectionCards
+            <CollectionCard
               key={collection.title}
               title={collection.title}
               setViewingItems={setViewingItems}

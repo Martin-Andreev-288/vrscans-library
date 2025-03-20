@@ -4,12 +4,12 @@ import { Button } from "../../components";
 import { FiTrash } from "react-icons/fi";
 import DeleteCollModal from "./DeleteCollModal";
 
-type CollectionCardsProps = {
+type CollectionCardProps = {
   title: string;
   setViewingItems: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-function CollectionCards({ title, setViewingItems }: CollectionCardsProps) {
+function CollectionCard({ title, setViewingItems }: CollectionCardProps) {
   const [isDeleteCollModalOpen, setIsDeleteCollModalOpen] = useState(false);
 
   const handleDeleteCollModalClose = () => {
@@ -51,4 +51,4 @@ function CollectionCards({ title, setViewingItems }: CollectionCardsProps) {
   );
 }
 
-export default CollectionCards;
+export default CollectionCard;
