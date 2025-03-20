@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ProductModal from "../products/ProductModal";
+import DeletePrCardModal from "./DeletePrCardModal";
 import AddToCollectionModal from "../collections/AddToCollectionModal";
 import { useDispatch, useSelector } from "react-redux";
 import { addToFavs, removeFromFavs } from "../../store/slices/favoritesSlice";
@@ -35,6 +36,7 @@ export default function CollectionProductCard({
 }: CollectionProductCardProps) {
   const [isProductModalOpen, setProductModalOpen] = useState(false);
   const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
+  const [isPrCardDeleteModalOpen, setIsPrCardDeleteModalOpen] = useState(false);
 
   const user = useSelector((state: RootState) => state.userState.user);
 
@@ -77,6 +79,10 @@ export default function CollectionProductCard({
     setIsCollectionModalOpen(false);
   };
 
+  const handleDeletePrCardModalClose = () => {
+    setIsPrCardDeleteModalOpen(false);
+  };
+
   return (
     <>
       <li
@@ -89,7 +95,10 @@ export default function CollectionProductCard({
             <>
               <button
                 className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300 z-20"
-                onClick={(e) => handleRemoveItem(e, collectionTitle, item.id)}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setIsPrCardDeleteModalOpen(true);
+                }}
               >
                 <FiTrash />
               </button>
@@ -140,6 +149,14 @@ export default function CollectionProductCard({
       )}
       {isCollectionModalOpen && (
         <AddToCollectionModal onClose={handleCollectionModalClose} item={item} />
+      )}
+      {isPrCardDeleteModalOpen && (
+        <DeletePrCardModal
+          onClose={handleDeletePrCardModalClose}
+          collectionTitle={collectionTitle}
+          itemName={item.name}
+          id={item.id}
+        />
       )}
     </>
   );
