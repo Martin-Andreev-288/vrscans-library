@@ -21,6 +21,11 @@ function createQueryParamsFromFilterSelection(selection: FilterSelection) {
   selection.colors.forEach((color) => result.push(["colors", String(color)]));
   selection.materials.forEach((material) => result.push(["materials", String(material)]));
   selection.tags.forEach((tag) => result.push(["tags", String(tag)]));
+
+  if (selection.searchTerm) {
+    result.push(["search", selection.searchTerm]);
+  }
+
   return String(new URLSearchParams(result));
 }
 
@@ -34,7 +39,8 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   const [filterSelection, setFilterSelection] = useState<FilterSelection>({
     materials: new Set(),
     colors: new Set(),
-    tags: new Set()
+    tags: new Set(),
+    searchTerm: ""
   });
 
   useEffect(() => {

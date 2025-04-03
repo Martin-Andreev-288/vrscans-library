@@ -68,4 +68,5 @@ export type FilterSelection = {
   materials: Set<number>;
   colors: Set<number>;
   tags: Set<number>;
+  searchTerm: string;
 };
