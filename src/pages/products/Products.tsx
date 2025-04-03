@@ -1,8 +1,10 @@
 import { ProductsFilters, ProductList } from "../../features";
+import { BackToTopBtn } from "../../components";
 
 export default function Products() {
   return (
     <div className="main">
+      <BackToTopBtn />
       <aside className="pt-14">
         <ProductsFilters />
       </aside>

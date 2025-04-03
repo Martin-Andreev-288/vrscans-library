@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FavProductsFilters, FavProductList } from "../../features";
 import { type FilterSelection } from "../../utils/types";
-import { AccessDenied } from "../../components";
+import { AccessDenied, BackToTopBtn } from "../../components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 
@@ -18,6 +18,7 @@ export default function Favorites() {
 
   return (
     <div className="main">
+      <BackToTopBtn />
       <aside className="pt-14">
         <FavProductsFilters
           favsFilterSelection={favsFilterSelection}

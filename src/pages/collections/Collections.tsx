@@ -7,7 +7,7 @@ import {
 import { type FilterSelection } from "../../utils/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { AccessDenied } from "../../components";
+import { AccessDenied, BackToTopBtn } from "../../components";
 
 export default function Collections() {
   const [viewingItems, setViewingItems] = useState<string | null>(null);
@@ -24,6 +24,7 @@ export default function Collections() {
 
   return (
     <div className="main">
+      <BackToTopBtn />
       <aside className="pt-14">
         {viewingItems ? (
           <CollectionProductsFilters
