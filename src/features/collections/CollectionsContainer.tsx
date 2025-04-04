@@ -4,6 +4,7 @@ import CollectionItemsContainer from "./CollectionItemsContainer";
 import CollectionCard from "./CollectionCard";
 import { type FilterSelection } from "../../utils/types";
 import { useMemo } from "react";
+import { useDebounce } from "../../hooks/useDebounce";
 
 type CollectionContainerProps = {
   viewingItems: string | null;
@@ -20,7 +21,7 @@ export default function CollectionContainerContainer({
   sortBy,
   searchQuery
 }: CollectionContainerProps) {
-  const collections = useSelector((state: RootState) => state.collections);
+  let collections = useSelector((state: RootState) => state.collections);
 
   const emptyPageText = "No collections found. Add your first collection to get started.";
 
@@ -48,6 +49,8 @@ export default function CollectionContainerContainer({
     return filteredColls;
   }, [collections, sortBy, searchQuery]);
 
+  collections = useDebounce(processedColls, 500);
+
   if (viewingItems) {
     return (
       <CollectionItemsContainer
@@ -60,9 +63,9 @@ export default function CollectionContainerContainer({
 
   return (
     <>
-      {processedColls.length ? (
+      {collections.length ? (
         <ul className="card-container">
-          {processedColls.map((collection) => (
+          {collections.map((collection) => (
             <CollectionCard
               key={collection.title}
               title={collection.title}
