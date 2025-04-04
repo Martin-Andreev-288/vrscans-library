@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { apiClient } from "../utils/apiClient";
 import { type VRScan, type FilterSelection } from "../utils/types";
+import { useDebounce } from "../hooks/useDebounce";
 
 type DataContextType = {
   vrscans: VRScan[];
@@ -43,9 +44,12 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     searchTerm: ""
   });
 
+  const debouncedFilterSelection = useDebounce(filterSelection, 500);
+
   useEffect(() => {
+    console.log("endless loop testing");
     refreshVrscans();
-  }, [filterSelection]);
+  }, [debouncedFilterSelection]);
 
   async function refreshVrscans(): Promise<void> {
     setIsLoading(true);

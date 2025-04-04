@@ -27,7 +27,6 @@ export default function ProductsFilters() {
 
   return (
     <div className="space-y-6">
-      {/* New Search and Reset Filters UI */}
       <div className="flex flex-col gap-4 sm:flex-row">
         <input
           type="text"
@@ -38,7 +37,6 @@ export default function ProductsFilters() {
         />
       </div>
 
-      {/* Existing Filter Sections */}
       <FilterSection
         title="Materials"
         options={materials}
