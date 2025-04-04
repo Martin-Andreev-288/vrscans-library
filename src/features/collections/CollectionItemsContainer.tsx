@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { VRScan, FilterSelection } from "../../utils/types";
 import CollectionItems from "./CollectionItems";
+import { useDebounce } from "../../hooks/useDebounce";
 
 type CollectionItemsContainerProps = {
   viewingItems: string;
@@ -43,14 +44,20 @@ export default function CollectionItemsContainer({
     [collItemsFilterSelection]
   );
 
-  useEffect(() => {
-    setAllCollItems(currentCollectionItems);
-    setCollItems(filterCollItems(currentCollectionItems));
-  }, [viewingItems, currentCollection]);
+  const debouncedcollItemsFilterSelection = useDebounce(collItemsFilterSelection, 500);
 
   useEffect(() => {
     setCollItems(filterCollItems(allCollItems));
-  }, [collItemsFilterSelection, allCollItems]);
+  }, [debouncedcollItemsFilterSelection]);
+
+  function updateCollItems() {
+    setAllCollItems(currentCollectionItems);
+    setCollItems(filterCollItems(currentCollectionItems));
+  }
+
+  useEffect(() => {
+    updateCollItems();
+  }, []);
 
   if (!currentCollection) {
     return (
