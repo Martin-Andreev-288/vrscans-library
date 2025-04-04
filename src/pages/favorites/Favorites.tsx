@@ -9,7 +9,8 @@ export default function Favorites() {
   const [favsFilterSelection, setFavsFilterSelection] = useState<FilterSelection>({
     materials: new Set(),
     colors: new Set(),
-    tags: new Set()
+    tags: new Set(),
+    searchTerm: ""
   });
 
   const user = useSelector((state: RootState) => state.userState.user);

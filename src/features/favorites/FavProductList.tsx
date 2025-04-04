@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { type VRScan, type FilterSelection } from "../../utils/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { useDebounce } from "../../hooks/useDebounce";
 
 type FavProductsListProps = {
   favsFilterSelection: FilterSelection;
@@ -20,6 +21,8 @@ export default function FavProductList({ favsFilterSelection }: FavProductsListP
   const filterFavs = useCallback(
     (favs: VRScan[]) => {
       return favs.filter((fav) => {
+        const searchTerm = favsFilterSelection.searchTerm?.toLowerCase().trim() || "";
+        const acceptsSearch = !searchTerm || fav.name.toLowerCase().includes(searchTerm);
         const acceptsMaterials =
           !favsFilterSelection.materials.size ||
           favsFilterSelection.materials.has(fav.materialTypeId);
@@ -30,15 +33,17 @@ export default function FavProductList({ favsFilterSelection }: FavProductsListP
           !favsFilterSelection.tags.size ||
           fav.tags.some((tag) => favsFilterSelection.tags.has(tag));
 
-        return acceptsMaterials && acceptsColors && acceptsTags;
+        return acceptsSearch && acceptsMaterials && acceptsColors && acceptsTags;
       });
     },
     [favsFilterSelection]
   );
 
+  const debouncedFavsFilterSelection = useDebounce(favsFilterSelection, 500);
+
   useEffect(() => {
     setFavs(filterFavs(allFavs));
-  }, [favsFilterSelection]);
+  }, [debouncedFavsFilterSelection]);
 
   function updateFavs() {
     setAllFavs(favProducts);

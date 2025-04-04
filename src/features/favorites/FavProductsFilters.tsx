@@ -14,6 +14,14 @@ export default function FavProductsFilters({
 }: FavProductsFiltersProps) {
   const { colors, materials, tags } = useFetchFiltersData();
   const [expandedFilter, setExpandedFilter] = useState<string | null>(null);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFavsFilterSelection({
+      ...favsFilterSelection,
+      searchTerm: e.target.value
+    });
+  };
+
   const toggleFilter = (filter: string) => {
     setExpandedFilter(expandedFilter === filter ? null : filter);
   };
@@ -29,6 +37,15 @@ export default function FavProductsFilters({
 
   return (
     <div className="space-y-6">
+      <div className="flex flex-col gap-4 sm:flex-row">
+        <input
+          type="text"
+          placeholder="Search materials..."
+          className="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={favsFilterSelection.searchTerm}
+          onChange={handleSearchChange}
+        />
+      </div>
       <FilterSection
         title="Materials"
         options={materials}
