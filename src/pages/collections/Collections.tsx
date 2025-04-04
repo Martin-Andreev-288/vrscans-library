@@ -17,6 +17,7 @@ export default function Collections() {
     tags: new Set()
   });
   const [sortBy, setSortBy] = useState<SortOption>("Sort by...");
+  const [searchQuery, setSearchQuery] = useState("");
   const user = useSelector((state: RootState) => state.userState.user);
   const title = viewingItems ? `Items in '${viewingItems}'` : "Collections";
 
@@ -32,7 +33,11 @@ export default function Collections() {
             setCollItemsFilterSelection={setCollItemsFilterSelection}
           />
         ) : (
-          <CollectionsSidebar setSortBy={setSortBy} />
+          <CollectionsSidebar
+            setSortBy={setSortBy}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
         )}
       </aside>
       <div className="p-2 pt-0">
@@ -42,6 +47,7 @@ export default function Collections() {
           setViewingItems={setViewingItems}
           collItemsFilterSelection={collItemsFilterSelection}
           sortBy={sortBy}
+          searchQuery={searchQuery}
         />
       </div>
     </div>

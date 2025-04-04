@@ -10,27 +10,19 @@ type CollectionContainerProps = {
   setViewingItems: React.Dispatch<React.SetStateAction<string | null>>;
   collItemsFilterSelection: FilterSelection;
   sortBy: string;
+  searchQuery: string;
 };
 
 export default function CollectionContainerContainer({
   viewingItems,
   setViewingItems,
   collItemsFilterSelection,
-  sortBy
+  sortBy,
+  searchQuery
 }: CollectionContainerProps) {
   const collections = useSelector((state: RootState) => state.collections);
 
   const emptyPageText = "No collections found. Add your first collection to get started.";
-
-  if (viewingItems) {
-    return (
-      <CollectionItemsContainer
-        viewingItems={viewingItems}
-        setViewingItems={setViewingItems}
-        collItemsFilterSelection={collItemsFilterSelection}
-      />
-    );
-  }
 
   const processedColls = useMemo(() => {
     let filteredColls = [...collections];
@@ -46,9 +38,25 @@ export default function CollectionContainerContainer({
         ? b.createdAt.localeCompare(a.createdAt) // Newest first
         : a.createdAt.localeCompare(b.createdAt); // Oldest first
     });
+    // Search filter by collection title:
+    if (searchQuery.trim()) {
+      filteredColls = filteredColls.filter((coll) =>
+        coll.title.toLowerCase().includes(searchQuery)
+      );
+    }
 
     return filteredColls;
-  }, [collections, sortBy]);
+  }, [collections, sortBy, searchQuery]);
+
+  if (viewingItems) {
+    return (
+      <CollectionItemsContainer
+        viewingItems={viewingItems}
+        setViewingItems={setViewingItems}
+        collItemsFilterSelection={collItemsFilterSelection}
+      />
+    );
+  }
 
   return (
     <>
