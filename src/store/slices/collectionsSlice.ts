@@ -19,7 +19,8 @@ const collectionsSlice = createSlice({
       const title = action.payload;
       const newCollection: CollectionState = {
         title,
-        items: []
+        items: [],
+        createdAt: new Date().toISOString()
       };
 
       state.push(newCollection);

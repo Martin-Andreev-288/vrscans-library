@@ -62,11 +62,14 @@ export type DataContextType = {
 export type CollectionState = {
   title: string;
   items: VRScan[];
+  createdAt: string;
 };
+
+export type SortOption = "Sort by..." | "a-z" | "z-a" | "newest" | "oldest";
 
 export type FilterSelection = {
   materials: Set<number>;
   colors: Set<number>;
   tags: Set<number>;
-  searchTerm: string;
+  searchTerm?: string;
 };
