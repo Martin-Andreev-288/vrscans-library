@@ -25,6 +25,8 @@ export default function CollectionItemsContainer({
   const filterCollItems = useCallback(
     (items: VRScan[]) => {
       return items.filter((fav) => {
+        const searchTerm = collItemsFilterSelection.searchTerm?.toLowerCase().trim() || "";
+        const acceptsSearch = !searchTerm || fav.name.toLowerCase().includes(searchTerm);
         const acceptsMaterials =
           !collItemsFilterSelection.materials.size ||
           collItemsFilterSelection.materials.has(fav.materialTypeId);
@@ -35,7 +37,7 @@ export default function CollectionItemsContainer({
           !collItemsFilterSelection.tags.size ||
           fav.tags.some((tag) => collItemsFilterSelection.tags.has(tag));
 
-        return acceptsMaterials && acceptsColors && acceptsTags;
+        return acceptsSearch && acceptsMaterials && acceptsColors && acceptsTags;
       });
     },
     [collItemsFilterSelection]

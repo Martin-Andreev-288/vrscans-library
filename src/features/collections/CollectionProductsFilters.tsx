@@ -18,6 +18,13 @@ export default function CollectionProductsFilters({
     setExpandedFilter(expandedFilter === filter ? null : filter);
   };
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCollItemsFilterSelection({
+      ...collItemsFilterSelection,
+      searchTerm: e.target.value
+    });
+  };
+
   const updateSelection = useCallback(
     (selection: Set<number>, type: "materials" | "colors" | "tags") => {
       const newFilterSelection = { ...collItemsFilterSelection };
@@ -29,6 +36,15 @@ export default function CollectionProductsFilters({
 
   return (
     <div className="space-y-6">
+      <div className="flex flex-col gap-4 sm:flex-row">
+        <input
+          type="text"
+          placeholder="Search materials..."
+          className="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          value={collItemsFilterSelection.searchTerm}
+          onChange={handleSearchChange}
+        />
+      </div>
       <FilterSection
         title="Materials"
         options={materials}

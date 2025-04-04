@@ -14,7 +14,8 @@ export default function Collections() {
   const [collItemsFilterSelection, setCollItemsFilterSelection] = useState<FilterSelection>({
     materials: new Set(),
     colors: new Set(),
-    tags: new Set()
+    tags: new Set(),
+    searchTerm: ""
   });
   const [sortBy, setSortBy] = useState<SortOption>("Sort by...");
   const [searchQuery, setSearchQuery] = useState("");
