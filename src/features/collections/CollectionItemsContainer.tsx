@@ -70,6 +70,7 @@ export default function CollectionItemsContainer({
   return (
     <CollectionItems
       collItems={collItems}
+      allCollItems={allCollItems}
       currentCollection={currentCollection}
       setViewingItems={setViewingItems}
     />

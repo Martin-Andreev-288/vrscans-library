@@ -5,12 +5,24 @@ import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
 
 type CollectionItemsProps = {
   collItems: VRScan[];
+  allCollItems: VRScan[];
   currentCollection: CollectionState;
   setViewingItems: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-function CollectionItems({ collItems, currentCollection, setViewingItems }: CollectionItemsProps) {
+function CollectionItems({
+  collItems,
+  allCollItems,
+  currentCollection,
+  setViewingItems
+}: CollectionItemsProps) {
   const { colors, industries, manufacturers, materials, tags } = useFetchFiltersData();
+
+  const emptyPageText =
+    allCollItems.length === 0
+      ? "No items in this collection."
+      : "No items match your search/filters ✖️ Try adjusting your criteria or clear filters";
+
   return (
     <>
       {collItems.length ? (
@@ -47,7 +59,7 @@ function CollectionItems({ collItems, currentCollection, setViewingItems }: Coll
           ))}
         </ul>
       ) : (
-        <p className="text-center text-gray-500">No items in this collection.</p>
+        <h1 className="text-center text-gray-500">{emptyPageText}</h1>
       )}
       <div className="mt-6 flex justify-center">
         <Button type="viewItemsButton" onClick={() => setViewingItems(null)}>

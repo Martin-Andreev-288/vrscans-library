@@ -57,7 +57,9 @@ export default function FavProductList({ favsFilterSelection }: FavProductsListP
   const { colors, industries, manufacturers, materials, tags } = useFetchFiltersData();
 
   const emptyPageText =
-    "Your favorites list is empty! ☹️ Start exploring and save your top scans now!";
+    favProducts.length === 0
+      ? "Your favorites list is empty! ☹️ Start exploring and save your top scans now!"
+      : "No favorites match your search/filters 🧐 Try adjusting your criteria or clear filters";
 
   return (
     <>
@@ -96,11 +98,14 @@ export default function FavProductList({ favsFilterSelection }: FavProductsListP
       ) : (
         <>
           <h1 className="text-xl font-bold mb-6 text-center">{emptyPageText}</h1>
-          <div className="mt-4 flex justify-center">
-            <NavLink to="/products">
-              <Button type="navButton">Begin Your VRS Journey</Button>
-            </NavLink>
-          </div>
+          {/* Only show the CTA button when truly empty */}
+          {favProducts.length === 0 && (
+            <div className="mt-4 flex justify-center">
+              <NavLink to="/products">
+                <Button type="navButton">Begin Your VRS Journey</Button>
+              </NavLink>
+            </div>
+          )}
         </>
       )}
     </>

@@ -23,7 +23,10 @@ export default function CollectionContainerContainer({
 }: CollectionContainerProps) {
   let collections = useSelector((state: RootState) => state.collections);
 
-  const emptyPageText = "No collections found. Add your first collection to get started.";
+  const emptyPageText =
+    collections.length === 0
+      ? "No collections found ☹️ Add your first collection to get started."
+      : "No collections match your search/filters 🧐 Try adjusting your criteria or clear filters";
 
   const processedColls = useMemo(() => {
     let filteredColls = [...collections];
