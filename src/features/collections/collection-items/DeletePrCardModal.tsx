@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import { removeItemFromCollection } from "../../store/slices/collectionsSlice";
-import { ModalWrapper } from "../../components";
+import { removeItemFromCollection } from "../../../store/slices/collectionsSlice";
+import { ModalWrapper } from "../../../components";
 import { MdClose } from "react-icons/md";
 
 type DeletePrCardModalProps = {

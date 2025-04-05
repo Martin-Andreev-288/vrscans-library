@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import CollectionItemsContainer from "./CollectionItemsContainer";
+import CollectionItemsContainer from "./collection-items/CollectionItemsContainer";
 import CollectionCard from "./CollectionCard";
 import { type FilterSelection } from "../../utils/types";
 import { useMemo } from "react";

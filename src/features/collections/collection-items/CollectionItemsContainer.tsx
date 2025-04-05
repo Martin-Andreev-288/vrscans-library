@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { VRScan, FilterSelection } from "../../utils/types";
+import { RootState } from "../../../store/store";
+import { VRScan, FilterSelection } from "../../../utils/types";
 import CollectionItems from "./CollectionItems";
-import { useDebounce } from "../../hooks/useDebounce";
+import { useDebounce } from "../../../hooks/useDebounce";
 
 type CollectionItemsContainerProps = {
   viewingItems: string;

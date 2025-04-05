@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
-import { FilterSection } from "../../components";
-import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
-import { type FilterSelection } from "../../utils/types";
+import { FilterSection } from "../../../components";
+import { useFetchFiltersData } from "../../../hooks/useFetchFiltersData";
+import { type FilterSelection } from "../../../utils/types";
 
 type CollectionProductsFiltersProps = {
   collItemsFilterSelection: FilterSelection;

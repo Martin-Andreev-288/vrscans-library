@@ -1,12 +1,12 @@
 import { useState } from "react";
-import ProductModal from "../products/ProductModal";
+import ProductModal from "../../products/ProductModal";
 import DeletePrCardModal from "./DeletePrCardModal";
-import AddToCollectionModal from "../collections/AddToCollectionModal";
+import AddToCollectionModal from "../AddToCollectionModal";
 import { useDispatch, useSelector } from "react-redux";
-import { addToFavs, removeFromFavs } from "../../store/slices/favoritesSlice";
-import { removeItemFromCollection } from "../../store/slices/collectionsSlice";
-import { type VRScan } from "../../utils/types";
-import { RootState } from "../../store/store";
+import { addToFavs, removeFromFavs } from "../../../store/slices/favoritesSlice";
+import { removeItemFromCollection } from "../../../store/slices/collectionsSlice";
+import { type VRScan } from "../../../utils/types";
+import { RootState } from "../../../store/store";
 import { FiTrash } from "react-icons/fi";
 
 export type CollectionProductCardProps = {

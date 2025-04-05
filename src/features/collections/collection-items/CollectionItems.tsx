@@ -1,7 +1,7 @@
-import { Button } from "../../components";
-import CollectionProductCard from "./CollectionProductCard";
-import { type VRScan, type CollectionState } from "../../utils/types";
-import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
+import { Button } from "../../../components";
+import CollectionProductCard from "../collection-items/CollectionProductCard";
+import { type VRScan, type CollectionState } from "../../../utils/types";
+import { useFetchFiltersData } from "../../../hooks/useFetchFiltersData";
 
 type CollectionItemsProps = {
   collItems: VRScan[];
