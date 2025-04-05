@@ -47,17 +47,21 @@ export default function CollectionItemsContainer({
   const debouncedcollItemsFilterSelection = useDebounce(collItemsFilterSelection, 500);
 
   useEffect(() => {
-    setCollItems(filterCollItems(allCollItems));
-  }, [debouncedcollItemsFilterSelection]);
-
-  function updateCollItems() {
     setAllCollItems(currentCollectionItems);
     setCollItems(filterCollItems(currentCollectionItems));
-  }
+  }, [viewingItems, currentCollection]);
 
   useEffect(() => {
-    updateCollItems();
-  }, []);
+    setCollItems(filterCollItems(allCollItems));
+  }, [debouncedcollItemsFilterSelection, allCollItems]);
+
+  if (!currentCollection) {
+    return (
+      <div className="text-center text-gray-500">
+        <p>Collection not found.</p>
+      </div>
+    );
+  }
 
   if (!currentCollection) {
     return (
