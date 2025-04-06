@@ -18,7 +18,7 @@ export default function Button({ children, onClick, type }: ButtonProps) {
     "inline-block text-xs bg-black font-semibold tracking-wide text-white transition-colors duration-300 hover:bg-green focus:bg-green focus:outline-none disabled:cursor-not-allowed";
 
   const styles = {
-    navButton: base + " rounded-full px-4 py-2",
+    navButton: base + " rounded-full px-4 py-2 w-[7rem]",
     welcomeButton:
       "border border-black rounded-full bg-white inline-flex items-center justify-center py-3 px-5 text-center text-sm font-medium text-black hover:bg-body-color hover:border-body-color",
     logInButton:
