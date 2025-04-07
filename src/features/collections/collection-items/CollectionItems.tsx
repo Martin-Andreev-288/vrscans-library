@@ -1,5 +1,5 @@
 import { Button } from "../../../components";
-import CollectionProductCard from "../collection-items/CollectionProductCard";
+import CollectionItemCard from "./CollectionItemCard";
 import { type VRScan, type CollectionState } from "../../../utils/types";
 import { useFetchFiltersData } from "../../../hooks/useFetchFiltersData";
 
@@ -28,7 +28,7 @@ function CollectionItems({
       {collItems.length ? (
         <ul className="card-container">
           {collItems.map((item) => (
-            <CollectionProductCard
+            <CollectionItemCard
               key={item.id}
               item={item}
               name={item.name}
