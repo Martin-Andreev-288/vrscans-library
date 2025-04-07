@@ -8,7 +8,10 @@ export default function Navbar() {
   const user = useSelector((state: RootState) => state.userState.user);
 
   return (
-    <nav className="flex items-center justify-between border-b-4 border-b-black pb-4">
+    <nav
+      className="flex items-center pt-2 justify-between w-full max-w-xl md:max-w-2xl lg:max-w-6xl mx-auto border-b-4 border-b-gray-200 pb-4 sticky top-0 z-50
+    bg-white/80 backdrop-blur-lg"
+    >
       <div>
         <Logo />
       </div>
