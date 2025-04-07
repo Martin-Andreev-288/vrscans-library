@@ -1,12 +1,12 @@
 import { useState } from "react";
-import ProductModal from "./ProductModal";
+import ProductModal from "../products/ProductModal";
 import AddToCollectionModal from "../collections/AddToCollectionModal";
 import { useDispatch, useSelector } from "react-redux";
 import { addToFavs, removeFromFavs } from "../../store/slices/favoritesSlice";
 import { type VRScan } from "../../utils/types";
 import { RootState } from "../../store/store";
 
-export type ProductCardProps = {
+export type FavProductCardProps = {
   name: string;
   item: VRScan;
   thumb: string;
@@ -18,7 +18,7 @@ export type ProductCardProps = {
   industries: string;
 };
 
-export default function ProductCard({
+export default function FavProductCard({
   name,
   item,
   thumb,
@@ -28,7 +28,7 @@ export default function ProductCard({
   colors,
   tags,
   industries
-}: ProductCardProps) {
+}: FavProductCardProps) {
   const [isProductModalOpen, setProductModalOpen] = useState(false);
   const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
 
@@ -63,16 +63,16 @@ export default function ProductCard({
     <>
       <li
         className="relative flex flex-col h-[440px] w-full
-  border-2 border-blue-100 rounded-xl shadow-lg hover:shadow-xl hover:border-blue-200
-  hover:scale-[1.02] transition-all duration-200 backdrop-blur-sm"
+        border-2 border-pink-100 rounded-2xl shadow-md hover:shadow-lg hover:scale-105
+        transition-transform duration-300"
       >
-        <div className="relative bg-blue-50/30 p-2 rounded-lg border border-blue-100 mb-4 group z-0">
+        <div className="relative bg-pink-50/30 p-2 rounded-lg border border-pink-100 mb-4 group z-0">
           {/* Buttons */}
           {user && (
             <>
               <button
-                className="absolute top-2 left-2 bg-white/90 text-blue-600 rounded-full p-2
-                shadow-sm hover:bg-blue-100/80 hover:shadow-md z-20 transition-all"
+                className="absolute top-2 left-2 bg-white/90 text-purple-600 rounded-full p-2
+                shadow-sm hover:bg-purple-100/80 hover:shadow-md z-20 transition-all"
                 onClick={(event) => {
                   event.stopPropagation();
                   setIsCollectionModalOpen(true);
@@ -129,24 +129,16 @@ export default function ProductCard({
             className="w-full h-40 object-contain rounded-md
             transition-transform duration-300 group-hover:scale-95"
           />
-          {isFavorite(item.id) && (
-            <div
-              className="absolute bottom-2 right-2 bg-white/90 px-2 py-1 rounded-full
-            text-xs text-blue-600 shadow-sm"
-            >
-              ★ Favorited
-            </div>
-          )}
         </div>
 
         {/* Content */}
         <div className="text-center px-4 flex flex-col flex-1 pb-4">
-          <h3 className="text-lg font-semibold mb-2 text-blue-800">{name}</h3>
-          <ul className="text-left text-sm space-y-2 text-blue-900/80 flex-1">
+          <h3 className="text-lg font-semibold mb-2 text-purple-800">{name}</h3>
+          <ul className="text-left text-sm space-y-2 text-purple-900/80 flex-1">
             <li className="flex items-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 mr-2 text-blue-500 flex-shrink-0 mt-0.5"
+                className="h-4 w-4 mr-2 text-purple-500 flex-shrink-0 mt-0.5"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -162,7 +154,7 @@ export default function ProductCard({
             <li className="flex items-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 mr-2 text-blue-500 flex-shrink-0 mt-0.5"
+                className="h-4 w-4 mr-2 text-purple-500 flex-shrink-0 mt-0.5"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -178,9 +170,9 @@ export default function ProductCard({
           </ul>
 
           {/* Click for details */}
-          <div className="mt-4 pt-2 border-t border-blue-100/50">
+          <div className="mt-4 pt-2 border-t border-purple-100/50">
             <p
-              className="text-xs text-blue-500/90 cursor-pointer italic"
+              className="text-xs text-purple-500/90 cursor-pointer italic"
               onClick={() => setProductModalOpen(true)}
             >
               Click for more details →

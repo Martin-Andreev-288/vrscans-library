@@ -1,4 +1,4 @@
-import ProductCard from "../products/ProductCard";
+import FavProductCard from "./FavProductCard";
 import { useFetchFiltersData } from "../../hooks/useFetchFiltersData";
 import { NavLink } from "react-router";
 import { Button } from "../../components";
@@ -66,7 +66,7 @@ export default function FavProductList({ favsFilterSelection }: FavProductsListP
       {favs.length ? (
         <ul className="card-container">
           {favs.map((product) => (
-            <ProductCard
+            <FavProductCard
               key={product.id}
               item={product}
               name={product.name}
