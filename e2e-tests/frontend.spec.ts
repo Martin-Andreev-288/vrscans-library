@@ -35,20 +35,22 @@ test.describe("products page", () => {
     expect(count).toBeGreaterThan(1);
   });
 
-  test("can filter materials", async ({ page }) => {
+  test("can search products", async ({ page }) => {
     await page.goto(appUrl);
     await page.getByRole("button", { name: "Explore VRScans" }).click();
     const items = page.locator(".card-container li");
     await expect(items.first()).toBeVisible({ timeout: 5_000 });
 
-    await page.getByRole("checkbox", { name: "Car Paint" }).click();
+    await page.getByPlaceholder("Search materials...").fill("Carpaint");
+    await page.waitForTimeout(1_500);
 
-    const filteredProducts = page.locator(".card-container li");
-    await expect(filteredProducts.first()).toContainText("Car Paint");
-    const productsCount = await filteredProducts.count();
+    const searchedProduct = page.locator(".card-container li h3");
+    await expect(searchedProduct.first()).toBeVisible();
+
+    const productsCount = await searchedProduct.count();
     for (let i = 0; i < productsCount; i++) {
-      const productText = await filteredProducts.nth(1).textContent();
-      expect(productText?.trim()).toContain("Car Paint");
+      const nameElement = await searchedProduct.nth(i).textContent();
+      expect(nameElement?.toLowerCase()).toContain("carpaint");
     }
   });
 });
