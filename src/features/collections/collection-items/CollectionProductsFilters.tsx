@@ -35,12 +35,12 @@ export default function CollectionProductsFilters({
   );
 
   return (
-    <div className="space-y-6">
+    <div className="filter-container">
       <div className="flex flex-col gap-4 sm:flex-row">
         <input
           type="text"
           placeholder="Search materials..."
-          className="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 input-styling"
           value={collItemsFilterSelection.searchTerm}
           onChange={handleSearchChange}
         />
