@@ -70,9 +70,9 @@ export default function AddToCollectionModal({ onClose, item }: AddToCollectionM
         </div>
 
         {/* List of Collections */}
-        <ul className="space-y-4 max-h-44 overflow-scroll">
+        <ul className="space-y-4 max-h-44 overflow-scroll border border-gray-200 rounded-md p-2 add-to-coll-scrollbar">
           {collections.map((collection) => (
-            <li className="flex justify-between items-center">
+            <li key={collection.title} className="flex justify-between items-center">
               <span className="text-gray-800">{collection.title}</span>
               {!isInTheCollection(collection.title) ? (
                 <button

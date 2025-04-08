@@ -11,6 +11,10 @@
     @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2;
   }
 
+  .add-to-coll-scrollbar {
+    @apply [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-blue-200 [&::-webkit-scrollbar-track]:bg-transparent;
+  }
+
   .loader {
     width: 45px;
     aspect-ratio: 0.75;
