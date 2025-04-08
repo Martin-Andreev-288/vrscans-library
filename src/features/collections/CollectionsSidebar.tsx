@@ -24,38 +24,64 @@ export default function CollectionsSidebar({
 
   return (
     <>
-      <div className="flex flex-col mb-6 sm:flex-row">
-        <input
-          type="text"
-          placeholder="Search collections..."
-          className="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-      </div>
-      <div className="p-6 bg-gray-100 rounded-lg shadow-md flex flex-col items-center gap-6 min-h-[300px]">
-        {/* Create Collection Button */}
-        <Button type="createCollectionButton" onClick={() => setCreateCollModalOpen(true)}>
-          <MdOutlineAddCircle className="mr-2 h-7 w-7" />
-          Create Collection
-        </Button>
+      <div className="space-y-6 pr-4 border-r border-blue-100/30 sticky top-0 h-screen pt-6">
+        {/* Search Input */}
+        <div className="flex flex-col gap-4">
+          <input
+            type="text"
+            placeholder="Search collections..."
+            className="w-full p-3 border-2 border-blue-200/50 rounded-xl bg-white/80
+              focus:outline-none focus:border-blue-300 focus:ring-2 focus:ring-blue-100
+              placeholder:text-blue-400/60 text-blue-800 shadow-sm transition-all
+              backdrop-blur-sm"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
 
-        {/* Sorting Dropdown */}
-        <div className="w-full space-y-2">
-          <label className="text-sm font-medium text-gray-700">Sort Collections</label>
-          <div className="relative w-full">
-            <select
-              className="w-full p-2 pr-8 text-sm border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
-              defaultValue=""
-              onChange={(e) => setSortBy(e.target.value as SortOption)}
-            >
-              <option value="">Sort by...</option>
-              <option value="a-z">A-Z</option>
-              <option value="z-a">Z-A</option>
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-            </select>
-            <FiChevronDown className="absolute right-2 top-3 h-4 w-4 text-gray-400 pointer-events-none" />
+        {/* Content Area */}
+        <div className="p-6 bg-white/50 backdrop-blur-sm rounded-xl shadow-sm border-2 border-blue-100/30 flex flex-col gap-6">
+          {/* Create Collection Button */}
+          <Button type="createCollectionButton" onClick={() => setCreateCollModalOpen(true)}>
+            <MdOutlineAddCircle className="mr-2 h-6 w-6 text-white/90" />
+            Create Collection
+          </Button>
+
+          {/* Sorting Dropdown */}
+          <div className="w-full space-y-2">
+            <div className="flex items-center gap-2 text-blue-800 ml-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5 text-blue-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4"
+                />
+              </svg>
+              <span className="font-medium text-sm">Sort Collections</span>
+            </div>
+            <div className="relative w-full">
+              <select
+                className="w-full p-2.5 pr-8 text-sm border-2 border-blue-200/50 rounded-xl
+                  focus:outline-none focus:border-blue-300 focus:ring-2 focus:ring-blue-100
+                  bg-white/80 text-blue-800 shadow-sm transition-all appearance-none"
+                defaultValue=""
+                onChange={(e) => setSortBy(e.target.value as SortOption)}
+              >
+                <option value="">Sort by...</option>
+                <option value="a-z">A-Z</option>
+                <option value="z-a">Z-A</option>
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+              </select>
+              <FiChevronDown className="absolute right-3 top-3.5 h-4 w-4 text-blue-400 pointer-events-none" />
+            </div>
           </div>
         </div>
       </div>
