@@ -26,7 +26,7 @@ export const action: ActionFunction = async ({ request }): Promise<Response | nu
 
     if (error instanceof AxiosError && error.response?.status === 400) {
       const errorMsg = error.response.data?.error?.message || "Registration failed";
-      toast.error(errorMsg, { autoClose: 2000 });
+      toast.error(errorMsg);
       return null;
     }
 
