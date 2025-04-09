@@ -1,27 +1,5 @@
 import { test, expect } from "@playwright/test";
-
-const appUrl = "https://vrscanslibrarynm.vercel.app";
-
-test.describe("landing page", () => {
-  test("render the Login / Signup button to the guest users", async ({ page }) => {
-    await page.goto(appUrl);
-
-    await expect(page.getByRole("button", { name: "Login / Signup" })).toBeVisible();
-  });
-
-  test("logging in works", async ({ page }) => {
-    await page.goto(appUrl);
-
-    await page.getByRole("button", { name: "Login / Signup" }).click();
-
-    await page.getByRole("textbox", { name: "Email" }).fill("proba@gmail.com");
-    await page.getByRole("textbox", { name: "Password" }).fill("123456");
-    await page.getByRole("button", { name: "Log In" }).click();
-
-    await expect(page).toHaveURL(`${appUrl}/products`);
-    await expect(page.getByRole("button", { name: "Tihael" })).toBeVisible();
-  });
-});
+import { appUrl } from "./testsHelpFn";
 
 test.describe("products page", () => {
   test("shows vrscans", async ({ page }) => {
