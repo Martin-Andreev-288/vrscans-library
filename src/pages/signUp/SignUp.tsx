@@ -25,8 +25,8 @@ export const action: ActionFunction = async ({ request }): Promise<Response | nu
     console.log(error);
 
     if (error instanceof AxiosError && error.response?.status === 400) {
-      const errorMsg = error.response.data?.error?.message || "Email already exists";
-      toast.error(errorMsg);
+      const errorMsg = error.response.data?.error?.message || "Registration failed";
+      toast.error(errorMsg, { autoClose: 2000 });
       return null;
     }
 
