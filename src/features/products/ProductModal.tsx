@@ -26,65 +26,102 @@ export default function ProductModal({
 
   return (
     <ModalWrapper>
-      {/* Modal Card */}
-      <div ref={modalRef} className="bg-white rounded-lg shadow-lg w-[90%] max-w-4xl p-4 flex">
+      <div
+        ref={modalRef}
+        className="bg-white rounded-xl shadow-2xl backdrop-blur-sm w-[90%] max-w-4xl p-8 flex border border-gray-100"
+      >
         {/* Left Section - Image */}
-        <div className="relative w-1/2 flex items-end justify-center bg-gray-100 p-2 rounded-lg border border-gray-100 mb-4 group">
+        <div className="relative w-1/2 flex items-end justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-4 rounded-xl border border-gray-200 group">
           <img
             src={thumb}
-            alt="image not found"
-            className="w-[80%] h-auto object-cover rounded-md mb-4 transition-transform duration-300 group-hover:scale-95"
+            alt="Product preview"
+            className="w-[85%] h-auto object-cover rounded-lg mb-4 transition-all duration-300 group-hover:scale-95 group-hover:shadow-lg"
           />
           {/* Buttons */}
           {user && (
-            <>
+            <div className="absolute top-3 left-3 right-3 flex justify-between">
               <button
-                className="absolute top-2 left-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
+                className="bg-white/90 backdrop-blur-sm text-gray-600 rounded-full p-2.5 shadow-sm hover:bg-white transition-all hover:scale-105 hover:shadow-md"
                 onClick={handleOpenCollectionModal}
               >
-                +
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
               </button>
               <button
-                className="absolute top-2 right-2 bg-gray-200 text-gray-600 rounded-full p-2 hover:bg-gray-300"
+                className={`${
+                  isFavorite ? "text-red-500" : "text-gray-400"
+                } bg-white/90 backdrop-blur-sm rounded-full p-2.5 shadow-sm hover:bg-white transition-all hover:scale-105 hover:shadow-md`}
                 onClick={handleToggleFavorite}
               >
-                {isFavorite ? "♥" : "♡"}
+                <svg
+                  className="w-5 h-5"
+                  fill={isFavorite ? "currentColor" : "none"}
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg>
               </button>
-            </>
+            </div>
           )}
         </div>
 
         {/* Right Section - Description */}
-        <div className="relative w-1/2 pl-6 flex flex-col items-center justify-center">
-          {/* Close Button */}
+        <div className="relative w-1/2 pl-8 flex flex-col">
           <button
-            className="absolute top-2 right-2 text-red-600 hover:text-red-800"
+            className="absolute top-0 right-0 text-gray-400 hover:text-gray-600 transition-colors p-2 hover:bg-gray-50 rounded-full"
             onClick={onClose}
           >
-            <FaTimes size={20} />
+            <FaTimes className="w-5 h-5" />
           </button>
 
-          {/* Product Details */}
-          <div className="text-center">
-            <h2 className="text-xl font-semibold mb-4">{name}</h2>
-            <p className="text-sm mb-2">
-              <span className="font-bold">Material Type:</span> {material}
-            </p>
-            <p className="text-sm mb-2">
-              <span className="font-bold">Colors:</span> {colors}
-            </p>
-            <p className="text-sm mb-2">
-              <span className="font-bold">Tags:</span> {tags}
-            </p>
-            <p className="text-sm mb-2">
-              <span className="font-bold">Manufacturer:</span> {manufacturer}
-            </p>
-            <p className="text-sm mb-2">
-              <span className="font-bold">Industries:</span> {industries}
-            </p>
-            <p className="text-sm mb-2">
-              <span className="font-bold">Filename:</span> {fileName}
-            </p>
+          <div className="space-y-5">
+            <h2 className="text-2xl font-bold text-gray-900 tracking-tight text-center">{name}</h2>
+
+            <div className="space-y-4 text-sm">
+              <div className="grid grid-cols-3 gap-3">
+                <dt className="col-span-1 font-medium text-gray-500">Material</dt>
+                <dd className="col-span-2 bg-gray-50 px-3 py-1.5 rounded-md text-gray-600 border border-gray-100">
+                  {material}
+                </dd>
+
+                <dt className="col-span-1 font-medium text-gray-500">Colors</dt>
+                <dd className="col-span-2 bg-gray-50 px-3 py-1.5 rounded-md text-gray-600 border border-gray-100">
+                  {colors}
+                </dd>
+
+                <dt className="col-span-1 font-medium text-gray-500">Tags</dt>
+                <dd className="col-span-2 bg-gray-50 px-3 py-1.5 rounded-md text-gray-600 border border-gray-100">
+                  {tags}
+                </dd>
+
+                <dt className="col-span-1 font-medium text-gray-500">Manufacturer</dt>
+                <dd className="col-span-2 bg-gray-50 px-3 py-1.5 rounded-md text-gray-600 border border-gray-100">
+                  {manufacturer}
+                </dd>
+
+                <dt className="col-span-1 font-medium text-gray-500">Industries</dt>
+                <dd className="col-span-2 bg-gray-50 px-3 py-1.5 rounded-md text-gray-600 border border-gray-100">
+                  {industries}
+                </dd>
+
+                <dt className="col-span-1 font-medium text-gray-500">Filename</dt>
+                <dd className="col-span-2 bg-blue-50 px-3 py-1.5 rounded-md text-blue-800 border border-blue-100 font-mono text-xs">
+                  {fileName}
+                </dd>
+              </div>
+            </div>
           </div>
         </div>
       </div>
