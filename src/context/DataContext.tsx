@@ -16,7 +16,7 @@ type DataContextType = {
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
-function createQueryParamsFromFilterSelection(selection: FilterSelection) {
+function createQueryParamsFromFiltersAndSearch(selection: FilterSelection) {
   // expected: [["colors", "3"], ["colors", "16"], ["tags", "35"]]
   const result: [string, string][] = [];
   selection.colors.forEach((color) => result.push(["colors", String(color)]));
@@ -54,7 +54,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
   async function refreshVrscans(): Promise<void> {
     setIsLoading(true);
     try {
-      const query = createQueryParamsFromFilterSelection(filterSelection);
+      const query = createQueryParamsFromFiltersAndSearch(filterSelection);
       const vrscansResponse = await apiClient.get<VRScan[]>(`/searchVrscans?${query}&page=1`);
       setVrscans(vrscansResponse.data);
       setCurrentPage(1);
@@ -74,7 +74,7 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
     setIsLoading(true);
     try {
       const nextPage = currentPage + 1;
-      const query = createQueryParamsFromFilterSelection(filterSelection);
+      const query = createQueryParamsFromFiltersAndSearch(filterSelection);
       const vrscansResponse = await apiClient.get<VRScan[]>(
         `/searchVrscans?${query}&page=${nextPage}`
       );
