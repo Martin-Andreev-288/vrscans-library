@@ -8,10 +8,11 @@ export default function ProductList() {
 
   // Add scroll listener for infinite scroll
   useEffect(() => {
+    console.log("endless loop testing");
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
-      const isNearBottom = scrollTop + clientHeight >= scrollHeight - 200;
+      const isNearBottom = scrollTop + clientHeight >= scrollHeight * 0.7;
 
       if (isNearBottom && hasMore && !isLoading) {
         loadMoreVrscans();
