@@ -20,6 +20,6 @@ describe("Logo Component", () => {
 
     expect(link).toHaveAttribute("href", "/products");
     expect(img).toHaveAttribute("src", "test-logo.png");
-    expect(img).toHaveAttribute("alt", "WorldWise logo");
+    expect(img).toHaveAttribute("alt", "Logo image");
   });
 });
