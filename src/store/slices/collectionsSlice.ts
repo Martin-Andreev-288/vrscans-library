@@ -65,3 +65,11 @@ export const { addCollection, removeCollection, addItemToCollection, removeItemF
   collectionsSlice.actions;
 
 export default collectionsSlice.reducer;
+
+/**
+* DISCLAIMER:
+This feature uses localStorage for data persistence instead of a backend service.
+Originally, the project was intended to use a JSON Server for managing collections and favorites,
+but due to limitations and issues with JSON Server paths/URLs discovered late in the development process,
+we chose to handle "collections" and "favorites" data entirely on the client side.
+*/
