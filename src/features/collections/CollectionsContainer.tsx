@@ -45,7 +45,7 @@ export default function CollectionContainerContainer({
     // Search filter by collection title:
     if (searchQuery.trim()) {
       filteredColls = filteredColls.filter((coll) =>
-        coll.title.toLowerCase().includes(searchQuery)
+        coll.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
